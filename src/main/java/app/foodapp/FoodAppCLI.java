@@ -4,9 +4,8 @@ import app.foodapp.controller.InterfaceCLI;
 
 public class FoodAppCLI {
 
-    private static InterfaceCLI interfaceCLI;
-
     public static void main(String[] args) {
+        InterfaceCLI interfaceCLI = new InterfaceCLI();
         interfaceCLI.FoodAppCLIMenu();
     }
 }
