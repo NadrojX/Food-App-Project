@@ -21,7 +21,7 @@ public class JsonGestion {
                     return;
                 }
                 JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-                System.out.println(i+1 + ") " + jsonObject.get(section));
+                System.out.println(i+1 + ". " + jsonObject.get(section));
                 i++;
             }
         } catch (IOException | ParseException e) {
@@ -50,12 +50,6 @@ public class JsonGestion {
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) throws IOException {
-        URL url = new URL("https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar&number=10&apiKey=a838ed2668eb4c62be56c24234c05a5c");
-        URLConnection connection = url.openConnection();
-        jsonArrayRead("title", connection);
     }
 
 }
