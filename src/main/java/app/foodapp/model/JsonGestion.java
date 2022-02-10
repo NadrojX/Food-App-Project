@@ -6,7 +6,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
-import java.net.URL;
 import java.net.URLConnection;
 
 public class JsonGestion {
@@ -42,12 +41,25 @@ public class JsonGestion {
 
     public static void jsonObjectAndArrayRead(String sectionArray, int idPosition, String section){
         JSONParser jsonParser = new JSONParser();
-        try(Reader reader = new FileReader("C:\\Users\\galat\\Desktop\\fichiers json\\recipeInformation.json")){
+        try(Reader reader = new FileReader("C:\\Users\\galat\\Desktop\\fichiers json\\findByIngredients2.json")){
             JSONObject jsonObjectFile = (JSONObject) jsonParser.parse(reader);
             JSONArray jsonArray = (JSONArray) jsonObjectFile.get(sectionArray);
             JSONObject jsonObject = (JSONObject) jsonArray.get(idPosition);
             System.out.println(jsonObject.get(section));
         } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void jsonReadIngredients(String sectionArray, int idPosition, String section, URLConnection urlConnection){
+        JSONParser jsonParser = new JSONParser();
+        try(Reader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()))){
+            JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);
+            JSONObject jsonObject = (JSONObject) jsonArray.get(idPosition);
+            JSONArray jsonArray1 = (JSONArray) jsonObject.get(sectionArray);
+            JSONObject jsonObject1 = (JSONObject) jsonArray1.get(idPosition);
+            System.out.println(jsonObject1.get(section));
+        } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
     }
