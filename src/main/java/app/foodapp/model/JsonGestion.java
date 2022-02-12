@@ -55,10 +55,15 @@ public class JsonGestion {
         JSONParser jsonParser = new JSONParser();
         try(Reader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()))){
             JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);
+            if(idPosition == jsonArray.size()){
+                return;
+            }
             JSONObject jsonObject = (JSONObject) jsonArray.get(idPosition);
             JSONArray jsonArray1 = (JSONArray) jsonObject.get(sectionArray);
-            JSONObject jsonObject1 = (JSONObject) jsonArray1.get(idPosition);
-            System.out.println(jsonObject1.get(section));
+            for (Object o : jsonArray1) {
+                JSONObject jsonObject1 = (JSONObject) o;
+                System.out.println(" - " + jsonObject1.get(section));
+            }
         } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
