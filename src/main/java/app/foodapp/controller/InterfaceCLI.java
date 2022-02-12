@@ -29,7 +29,7 @@ public class InterfaceCLI {
 
     public void receiptsResearch() throws IOException {
         Scanner scannerIngredients = new Scanner(System.in);
-        System.out.println("Quel est où qu'elles sont les ingrédients que vous possédez ? (Exemple du format d'écriture : riz, carotte en anglais)");
+        System.out.println("Quel est ou qu'elles sont les ingrédients que vous possédez ? (Exemple du format d'écriture : riz, carotte en anglais)");
         String ingredients = scannerIngredients.nextLine();
 
         Scanner scannerNumber = new Scanner(System.in);
@@ -41,7 +41,7 @@ public class InterfaceCLI {
         URLConnection spoonacular = url.openConnection();
 
         JsonGestion.jsonArrayRead("title", spoonacular);
-        System.out.println("De quelle recette ci-dessus, souhaitez-vous connaître la recette ?");
+        System.out.println("\nDe quelle recette ci-dessus, souhaitez-vous connaître la recette ?");
         Scanner scannerNumberArray = new Scanner(System.in);
 
         int numberArray = scannerNumberArray.nextInt();
@@ -54,7 +54,7 @@ public class InterfaceCLI {
         System.out.println("Ingrédients manquants :");
         JsonGestion.jsonReadIngredients("missedIngredients", numberArray-1, "original", spoonacular3);
 
-        System.out.println("Voulez-vous ajouter cette recette au favoris ?  (Y or N ou OUI ou NON)");
+        System.out.println("\nVoulez-vous ajouter cette recette au favoris ?  (Y or N ou OUI ou NON)");
         Scanner scannerFav = new Scanner(System.in);
         switch (scannerFav.next()) {
             default -> {
@@ -64,7 +64,7 @@ public class InterfaceCLI {
         }
 
         Scanner scannerEnd = new Scanner(System.in);
-        System.out.println("Que voulez-vous faire maintenant ?");
+        System.out.println("\nQue voulez-vous faire maintenant ?");
         System.out.println("1. Retourner au menu.");
         System.out.println("2. Quitter.");
         switch (scannerEnd.nextInt()) {
@@ -73,7 +73,6 @@ public class InterfaceCLI {
             case 1 -> FoodAppCLIMenu();
             case 2 -> System.exit(0);
         }
-
     }
 
     public void favoriteReceipts(){
