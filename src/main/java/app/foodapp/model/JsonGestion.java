@@ -10,7 +10,7 @@ import java.net.URLConnection;
 
 public class JsonGestion {
 
-    public static void jsonArrayRead(String section, URLConnection urlConnection){
+    public static void jsonTitleIngredientsRead(String section, URLConnection urlConnection){
         int i = 0;
         JSONParser jsonParser = new JSONParser();
         try(Reader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()))){
@@ -65,6 +65,33 @@ public class JsonGestion {
                 System.out.println(" - " + jsonObject1.get(section));
             }
         } catch (ParseException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void jsonAddFav(String titleRecipes){
+        File file = new File("fav.json");
+        try {
+            if(!file.exists()){
+                FileWriter fileWriter = new FileWriter(file);
+                JSONArray jsonArray = new JSONArray();
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("title", titleRecipes);
+                jsonArray.add(jsonObject);
+                fileWriter.write(jsonArray.toJSONString());
+                fileWriter.flush();
+            } else {
+                JSONParser jsonParser = new JSONParser();
+                Reader reader = new FileReader(file);
+                JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("title", titleRecipes);
+                jsonArray.add(jsonObject);
+                FileWriter fileWriter = new FileWriter(file);
+                fileWriter.write(jsonArray.toJSONString());
+                fileWriter.flush();
+            }
+        } catch (Exception e){
             e.printStackTrace();
         }
     }

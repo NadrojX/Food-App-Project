@@ -2,6 +2,7 @@ package app.foodapp.controller;
 
 import app.foodapp.model.JsonGestion;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -40,7 +41,7 @@ public class InterfaceCLI {
         URL url = new URL("https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + ingredients + "&number=" + number + "&apiKey=a838ed2668eb4c62be56c24234c05a5c");
         URLConnection spoonacular = url.openConnection();
 
-        JsonGestion.jsonArrayRead("title", spoonacular);
+        JsonGestion.jsonTitleIngredientsRead("title", spoonacular);
         System.out.println("\nDe quelle recette ci-dessus, souhaitez-vous connaître la recette ?");
         Scanner scannerNumberArray = new Scanner(System.in);
 
