@@ -28,6 +28,24 @@ public class JsonGestion {
         }
     }
 
+    public static void jsonFavTitleRead(String section, File file){
+        int i = 0;
+        JSONParser jsonParser = new JSONParser();
+        try(Reader reader = new FileReader(file)){
+            JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);
+            while (jsonArray.iterator().hasNext()){
+                if(i >= jsonArray.size()){
+                    return;
+                }
+                JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                System.out.println(i+1 + ". " + jsonObject.get(section));
+                i++;
+            }
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static Object jsonObjectRead(String section, URLConnection urlConnection){
         JSONParser jsonParser = new JSONParser();
         try(Reader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()))){
@@ -69,14 +87,15 @@ public class JsonGestion {
         }
     }
 
-    public static void jsonAddFav(String titleRecipes){
+    public static void jsonAddFav(String id, String titleRecipes){
         File file = new File("fav.json");
         try {
             if(!file.exists()){
                 FileWriter fileWriter = new FileWriter(file);
                 JSONArray jsonArray = new JSONArray();
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("id", titleRecipes);
+                jsonObject.put("id", id);
+                jsonObject.put("title", titleRecipes);
                 jsonArray.add(jsonObject);
                 fileWriter.write(jsonArray.toJSONString());
                 fileWriter.flush();
@@ -86,7 +105,8 @@ public class JsonGestion {
                 Reader reader = new FileReader(file);
                 JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("id", titleRecipes);
+                jsonObject.put("id", id);
+                jsonObject.put("title", titleRecipes);
                 if(jsonArray.contains(jsonObject)){
                     System.out.println("Déjà dans vos favoris.");
                     return;
@@ -116,5 +136,6 @@ public class JsonGestion {
         }
         return null;
     }
+
 
 }
