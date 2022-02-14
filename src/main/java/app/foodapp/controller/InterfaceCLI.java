@@ -62,8 +62,7 @@ public class InterfaceCLI {
             default -> {
             }
             case "y", "Y", "oui", "OUI" -> {
-                JsonGestion.jsonAddFav(JsonGestion.jsonGetTitleIngredients("title", numberArray - 1, spoonacular4));
-                System.out.println("Recette ajoutée au favoris.");
+                JsonGestion.jsonAddFav(JsonGestion.jsonGetId("id", numberArray-1, spoonacular4));
             }
             case "n", "N", "non", "NON" -> System.out.println("Recette pas ajoutée au favoris.");
         }
@@ -80,8 +79,14 @@ public class InterfaceCLI {
         }
     }
 
-    public void favoriteReceipts(){
-        
+    public void favoriteReceipts() throws IOException {
+        File file = new File("fav.json");
+        if(!file.exists()){
+            System.out.println("Vous n'avez pas de favoris.\n");
+            FoodAppCLIMenu();
+        } else {
+            
+        }
     }
 
 }

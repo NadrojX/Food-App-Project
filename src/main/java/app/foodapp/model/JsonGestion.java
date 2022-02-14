@@ -76,27 +76,33 @@ public class JsonGestion {
                 FileWriter fileWriter = new FileWriter(file);
                 JSONArray jsonArray = new JSONArray();
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("title", titleRecipes);
+                jsonObject.put("id", titleRecipes);
                 jsonArray.add(jsonObject);
                 fileWriter.write(jsonArray.toJSONString());
                 fileWriter.flush();
+                System.out.println("Recette ajoutée au favoris.");
             } else {
                 JSONParser jsonParser = new JSONParser();
                 Reader reader = new FileReader(file);
                 JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("title", titleRecipes);
+                jsonObject.put("id", titleRecipes);
+                if(jsonArray.contains(jsonObject)){
+                    System.out.println("Déjà dans vos favoris.");
+                    return;
+                }
                 jsonArray.add(jsonObject);
                 FileWriter fileWriter = new FileWriter(file);
                 fileWriter.write(jsonArray.toJSONString());
                 fileWriter.flush();
+                System.out.println("Recette ajoutée au favoris.");
             }
         } catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    public static String jsonGetTitleIngredients(String section, int idPosition,URLConnection urlConnection){
+    public static String jsonGetId(String section, int idPosition, URLConnection urlConnection){
         JSONParser jsonParser = new JSONParser();
         try(Reader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()))){
             JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);
