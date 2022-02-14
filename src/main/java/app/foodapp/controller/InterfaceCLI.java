@@ -57,10 +57,14 @@ public class InterfaceCLI {
 
         System.out.println("\nVoulez-vous ajouter cette recette au favoris ?  (Y or N ou OUI ou NON)");
         Scanner scannerFav = new Scanner(System.in);
+        URLConnection spoonacular4 = url.openConnection();
         switch (scannerFav.next()) {
             default -> {
             }
-            case "y", "Y", "oui", "OUI" -> System.out.println("Recette ajoutée au favoris.");
+            case "y", "Y", "oui", "OUI" -> {
+                JsonGestion.jsonAddFav(JsonGestion.jsonGetTitleIngredients("title", numberArray - 1, spoonacular4));
+                System.out.println("Recette ajoutée au favoris.");
+            }
             case "n", "N", "non", "NON" -> System.out.println("Recette pas ajoutée au favoris.");
         }
 
@@ -77,7 +81,7 @@ public class InterfaceCLI {
     }
 
     public void favoriteReceipts(){
-
+        
     }
 
 }

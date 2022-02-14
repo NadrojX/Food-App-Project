@@ -10,4 +10,5 @@ public class FoodAppCLI {
         InterfaceCLI interfaceCLI = new InterfaceCLI();
         interfaceCLI.FoodAppCLIMenu();
     }
+
 }

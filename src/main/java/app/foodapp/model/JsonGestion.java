@@ -96,4 +96,19 @@ public class JsonGestion {
         }
     }
 
+    public static String jsonGetTitleIngredients(String section, int idPosition,URLConnection urlConnection){
+        JSONParser jsonParser = new JSONParser();
+        try(Reader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()))){
+            JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);
+            if(idPosition >= jsonArray.size()){
+                return null;
+            }
+            JSONObject jsonObject = (JSONObject) jsonArray.get(idPosition);
+            return jsonObject.get(section).toString();
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
