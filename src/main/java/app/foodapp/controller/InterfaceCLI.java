@@ -58,12 +58,11 @@ public class InterfaceCLI {
         System.out.println("\nVoulez-vous ajouter cette recette au favoris ?  (Y or N ou OUI ou NON)");
         Scanner scannerFav = new Scanner(System.in);
         URLConnection spoonacular4 = url.openConnection();
+        URLConnection spoonacular5 = url.openConnection();
         switch (scannerFav.next()) {
             default -> {
             }
-            case "y", "Y", "oui", "OUI" -> {
-                JsonGestion.jsonAddFav(JsonGestion.jsonGetId("id", numberArray-1, spoonacular4));
-            }
+            case "y", "Y", "oui", "OUI" -> JsonGestion.jsonAddFav(JsonGestion.jsonGetId("id", numberArray-1, spoonacular4), JsonGestion.jsonGetId("title", numberArray-1, spoonacular5));
             case "n", "N", "non", "NON" -> System.out.println("Recette pas ajoutée au favoris.");
         }
 
@@ -85,7 +84,8 @@ public class InterfaceCLI {
             System.out.println("Vous n'avez pas de favoris.\n");
             FoodAppCLIMenu();
         } else {
-            
+            System.out.println("--------[Favoris]--------");
+            JsonGestion.jsonFavTitleRead("title", file);
         }
     }
 
