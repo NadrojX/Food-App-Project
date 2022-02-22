@@ -79,7 +79,7 @@ public class InterfaceCLI {
     }
 
     public void favoriteReceipts() throws IOException {
-        File file = new File("fav.json");
+        File file = new File("src/main/resources/fav.json");
         if(!file.exists()){
             System.out.println("Vous n'avez pas de favoris.\n");
             FoodAppCLIMenu();
