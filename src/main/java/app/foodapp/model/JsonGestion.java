@@ -88,7 +88,7 @@ public class JsonGestion {
     }
 
     public static void jsonAddFav(String id, String titleRecipes){
-        File file = new File("fav.json");
+        File file = new File("src/main/resources/fav.json");
         try {
             if(!file.exists()){
                 FileWriter fileWriter = new FileWriter(file);
