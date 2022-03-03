@@ -1,7 +1,6 @@
 package app.foodapp.controller;
 
 import app.foodapp.model.JsonGestion;
-import org.json.simple.parser.ParseException;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +10,7 @@ import java.util.Scanner;
 
 public class InterfaceCLI {
 
-    public void FoodAppCLIMenu() throws IOException, ParseException {
+    public void FoodAppCLIMenu() throws IOException {
         System.out.println("-----[Fun 'Eat | Mode Console]-----");
         System.out.println("\t1. Recherche de recette.\n");
         System.out.println("\t2. Recette en favoris.\n");
@@ -29,7 +28,7 @@ public class InterfaceCLI {
         }
     }
 
-    public void receiptsResearch() throws IOException, ParseException {
+    public void receiptsResearch() throws IOException {
         Scanner scannerIngredients = new Scanner(System.in);
         System.out.println("Quel est ou qu'elles sont les ingrédients que vous possédez ? (Exemple du format d'écriture : riz, carotte en anglais)");
         String ingredients = scannerIngredients.nextLine();
@@ -79,7 +78,7 @@ public class InterfaceCLI {
         }
     }
 
-    public void favoriteReceipts() throws IOException, ParseException {
+    public void favoriteReceipts() throws IOException {
         File file = new File("src/main/resources/fav.json");
         if(!file.exists()){
             System.out.println("Vous n'avez pas de favoris.\n");
@@ -87,6 +86,47 @@ public class InterfaceCLI {
         } else {
             System.out.println("--------[Favoris]--------");
             JsonGestion.jsonFavTitleRead("title", file);
+            System.out.println("-------------------------");
+            System.out.println("Quelle recette dans vos favoris voulez-vous choisir ?");
+
+            Scanner scanner = new Scanner(System.in);
+            int positionChoice = scanner.nextInt() - 1;
+            URL url = new URL("https://api.spoonacular.com/recipes/" + JsonGestion.jsonReturnId(file, positionChoice) + "/information?&apiKey=a838ed2668eb4c62be56c24234c05a5c");
+            URLConnection spoonacular = url.openConnection();
+            System.out.println("Titre de la recette : \n" + JsonGestion.jsonObjectRead("title", spoonacular) + "\n");
+
+            spoonacular = url.openConnection();
+            System.out.println("Ingrédients :");
+            JsonGestion.jsonObjectAndArrayRead("extendedIngredients","original", spoonacular);
+
+            spoonacular = url.openConnection();
+            System.out.println("\nÉtapes de la recette :");
+            JsonGestion.jsonObjectAndArrayRead("analyzedInstructions","steps", spoonacular);
+
+            System.out.println("\nVoulez-vous supprimer cette recette des favoris ?");
+            Scanner choice = new Scanner(System.in);
+            switch (choice.next()) {
+                default -> {
+                }
+                case "y", "Y", "oui", "OUI" -> {
+                    JsonGestion.jsonDelFav(positionChoice);
+                    System.out.println("Recette supprimée des favoris.");
+                }
+                case "n", "N", "non", "NON" -> System.out.println("Recette conservée dans les favoris.");
+            }
+
+            Scanner scannerEnd = new Scanner(System.in);
+            System.out.println("\nQue voulez-vous faire maintenant ?");
+            System.out.println("1. Retourner au menu.");
+            System.out.println("2. Supprimer toutes la liste des favoris.");
+            System.out.println("3. Quitter.");
+            switch (scannerEnd.nextInt()) {
+                default -> {
+                }
+                case 1 -> FoodAppCLIMenu();
+                case 2 -> file.delete();
+                case 3 -> System.exit(0);
+            }
         }
     }
 
