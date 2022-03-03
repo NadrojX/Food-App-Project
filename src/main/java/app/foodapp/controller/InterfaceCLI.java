@@ -1,6 +1,7 @@
 package app.foodapp.controller;
 
 import app.foodapp.model.JsonGestion;
+import org.json.simple.parser.ParseException;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +11,7 @@ import java.util.Scanner;
 
 public class InterfaceCLI {
 
-    public void FoodAppCLIMenu() throws IOException {
+    public void FoodAppCLIMenu() throws IOException, ParseException {
         System.out.println("-----[Fun 'Eat | Mode Console]-----");
         System.out.println("\t1. Recherche de recette.\n");
         System.out.println("\t2. Recette en favoris.\n");
@@ -28,7 +29,7 @@ public class InterfaceCLI {
         }
     }
 
-    public void receiptsResearch() throws IOException {
+    public void receiptsResearch() throws IOException, ParseException {
         Scanner scannerIngredients = new Scanner(System.in);
         System.out.println("Quel est ou qu'elles sont les ingrédients que vous possédez ? (Exemple du format d'écriture : riz, carotte en anglais)");
         String ingredients = scannerIngredients.nextLine();
@@ -78,7 +79,7 @@ public class InterfaceCLI {
         }
     }
 
-    public void favoriteReceipts() throws IOException {
+    public void favoriteReceipts() throws IOException, ParseException {
         File file = new File("src/main/resources/fav.json");
         if(!file.exists()){
             System.out.println("Vous n'avez pas de favoris.\n");

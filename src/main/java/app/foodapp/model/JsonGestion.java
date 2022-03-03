@@ -122,6 +122,17 @@ public class JsonGestion {
         }
     }
 
+    public static void jsonDelFav(int position) throws IOException, ParseException {
+        File file = new File("src/main/resources/fav.json");
+        JSONParser jsonParser = new JSONParser();
+        Reader reader = new FileReader(file);
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);
+        jsonArray.remove(position);
+        FileWriter fileWriter = new FileWriter(file);
+        fileWriter.write(jsonArray.toJSONString());
+        fileWriter.flush();
+    }
+
     public static String jsonGetId(String section, int idPosition, URLConnection urlConnection){
         JSONParser jsonParser = new JSONParser();
         try(Reader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()))){
