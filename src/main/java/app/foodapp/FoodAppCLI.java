@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class FoodAppCLI {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException{
         InterfaceCLI interfaceCLI = new InterfaceCLI();
         interfaceCLI.FoodAppCLIMenu();
     }
