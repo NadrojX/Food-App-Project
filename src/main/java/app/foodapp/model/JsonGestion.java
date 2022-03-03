@@ -71,6 +71,24 @@ public class JsonGestion {
         }
     }
 
+    public static void jsonStepsRead(String sectionArray, URLConnection urlConnection) {
+        JSONParser jsonParser = new JSONParser();
+        try (Reader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()))){
+            JSONObject jsonObjectFile = (JSONObject) jsonParser.parse(reader);
+            JSONArray jsonArray = (JSONArray) jsonObjectFile.get(sectionArray);
+            for (Object o : jsonArray) {
+                JSONObject jsonObject = (JSONObject) o;
+                JSONArray jsonArray1 = (JSONArray) jsonObject.get("steps");
+                for(Object o2 : jsonArray1){
+                    JSONObject jsonObject1 = (JSONObject) o2;
+                    System.out.println( "step " +jsonObject1.get("number").toString() + " : " + jsonObject1.get("step"));
+                }
+            }
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void jsonReadIngredients(String sectionArray, int idPosition, String section, URLConnection urlConnection) {
         JSONParser jsonParser = new JSONParser();
         try (Reader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()))) {

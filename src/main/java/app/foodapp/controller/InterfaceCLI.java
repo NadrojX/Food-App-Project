@@ -48,12 +48,18 @@ public class InterfaceCLI {
         int numberArray = scannerNumberArray.nextInt();
 
         URLConnection spoonacular2 = url.openConnection();
-        System.out.println("Ingrédients utilisés :");
+        System.out.println("\nIngrédients utilisés (possédé/mis dans la recherche):");
         JsonGestion.jsonReadIngredients("usedIngredients", numberArray-1, "original", spoonacular2);
 
         URLConnection spoonacular3 = url.openConnection();
-        System.out.println("Ingrédients manquants :");
+        System.out.println("\nIngrédients manquants :");
         JsonGestion.jsonReadIngredients("missedIngredients", numberArray-1, "original", spoonacular3);
+
+        spoonacular3 = url.openConnection();
+        URL urlStep = new URL("https://api.spoonacular.com/recipes/" + JsonGestion.jsonGetId("id", numberArray-1, spoonacular3) + "/information?&apiKey=a838ed2668eb4c62be56c24234c05a5c");
+        URLConnection spoonacularStep = urlStep.openConnection();
+        System.out.println("\nÉtapes de la recette :");
+        JsonGestion.jsonStepsRead("analyzedInstructions", spoonacularStep);
 
         System.out.println("\nVoulez-vous ajouter cette recette au favoris ?  (Y or N ou OUI ou NON)");
         Scanner scannerFav = new Scanner(System.in);
@@ -101,7 +107,7 @@ public class InterfaceCLI {
 
             spoonacular = url.openConnection();
             System.out.println("\nÉtapes de la recette :");
-            JsonGestion.jsonObjectAndArrayRead("analyzedInstructions","steps", spoonacular);
+            JsonGestion.jsonStepsRead("analyzedInstructions", spoonacular);
 
             System.out.println("\nVoulez-vous supprimer cette recette des favoris ?");
             Scanner choice = new Scanner(System.in);
