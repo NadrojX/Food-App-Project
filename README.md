@@ -7,4 +7,8 @@ une application de recherche de recettes de cuisine.
 
 Groupe R Team 1 :
 ALAMI IBN JAMAA Adam    
-SIARI Amine 
+SIARI Amine
+
+Groupe R Team 2 :
+FATEH Nacer
+GALATOLA Jordan
