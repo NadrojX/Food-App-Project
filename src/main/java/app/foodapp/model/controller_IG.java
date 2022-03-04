@@ -132,7 +132,7 @@ public class controller_IG {
 */
     @FXML
     public void switchToScene2() throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("favoris.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/app/foodapp/view/favoris.fxml"));
         Stage window = (Stage) fav_button.getScene().getWindow();
         window.setScene(new Scene(root));
 
@@ -140,7 +140,7 @@ public class controller_IG {
 
     @FXML
     public void switchToScene3() throws Exception {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("foodapp.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("/app/foodapp/view/foodapp.fxml"));
         Stage window = (Stage) logo.getScene().getWindow();
         window.setScene(new Scene(root));
     }
