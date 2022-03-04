@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@MyCss.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.foodapp.view.Favoris">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@MyCss.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.foodapp.model.controller_IG">
     <children>
         <BorderPane layoutX="-1.0" layoutY="-2.0" prefHeight="715.0" prefWidth="1104.0" style="-fx-background-color: #FFE7D1;">
             <top>
@@ -23,7 +23,7 @@
                     <children>
                         <VBox alignment="CENTER" prefHeight="104.0" prefWidth="214.0">
                             <children>
-                                <ImageView fitHeight="46.0" fitWidth="340.0" onMouseClicked="#switchToScene3" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fx:id="logo" fitHeight="46.0" fitWidth="340.0" onMouseClicked="#switchToScene3" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@LOGO-ROUGE.png" />
                                     </image>
@@ -32,7 +32,7 @@
                         </VBox>
                         <HBox prefHeight="104.0" prefWidth="596.0">
                             <children>
-                                <Button fx:id="fav_button" mnemonicParsing="false" onMouseClicked="#switchToScene2" prefHeight="35.0" prefWidth="46.0" styleClass="button_heart">
+                                <Button fx:id="fav_button" mnemonicParsing="false" onAction="#switchToScene2" prefHeight="35.0" prefWidth="46.0" styleClass="button_heart">
                                     <HBox.margin>
                                         <Insets left="500.0" top="20.0" />
                                     </HBox.margin></Button>

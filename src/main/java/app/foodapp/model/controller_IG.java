@@ -3,16 +3,22 @@ package app.foodapp.model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
 public class controller_IG {
+
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
 
     @FXML
@@ -27,7 +33,7 @@ public class controller_IG {
         int index = liste.getSelectionModel().getSelectedIndex();
     }
 
-
+/*
 
     public void addAndRemoveFromFavorites(ActionEvent event) {
         if (checkFav == 1) {
@@ -42,7 +48,7 @@ public class controller_IG {
             checkFav = 1;
         }
     }
-
+*/
     @FXML
     private Button quit;
 
@@ -111,25 +117,31 @@ public class controller_IG {
     @FXML
     private Button button_fav5;
 
+    @FXML
+    private ListView<?> liste;
 
     @FXML
-    void switchToScene1(MouseEvent event) throws Exception {
+    private ImageView logo;
+/*
+    @FXML
+    void switchToScene1(ActionEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Page_recette.fxml"));
         Stage window = (Stage) next_button.getScene().getWindow();
         window.setScene(new Scene(root));
     }
-
+*/
     @FXML
-    void switchToScene2(MouseEvent event) throws Exception {
+    public void switchToScene2() throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("favoris.fxml"));
-            Stage window = (Stage) next_button.getScene().getWindow();
+        Stage window = (Stage) fav_button.getScene().getWindow();
         window.setScene(new Scene(root));
+
     }
 
     @FXML
-    void switchToScene3(MouseEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("foodapp.fxml"));
-        Stage window = (Stage) next_button.getScene().getWindow();
+    public void switchToScene3() throws Exception {
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("foodapp.fxml"));
+        Stage window = (Stage) logo.getScene().getWindow();
         window.setScene(new Scene(root));
     }
 }
