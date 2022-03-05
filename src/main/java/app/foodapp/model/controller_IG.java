@@ -3,7 +3,6 @@ package app.foodapp.model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -13,7 +12,6 @@ import javafx.scene.image.ImageView;
 import org.json.simple.JSONObject;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -119,7 +117,7 @@ public class controller_IG {
 
     @FXML
     void switchToScene1() throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/app/foodapp/view/Page_recette.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/app/foodapp/view/recipe.fxml"));
         Stage window = (Stage) liste.getScene().getWindow();
         window.setScene(new Scene(root));
     }

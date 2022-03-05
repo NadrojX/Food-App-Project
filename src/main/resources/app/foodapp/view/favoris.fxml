@@ -16,9 +16,9 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@MyCss.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.foodapp.model.controller_IG">
     <children>
-        <BorderPane layoutX="-1.0" layoutY="-2.0" prefHeight="715.0" prefWidth="1104.0" style="-fx-background-color: #FFE7D1;">
+        <BorderPane layoutX="-1.0" layoutY="-2.0" prefHeight="715.0" prefWidth="1104.0" style="-fx-background-color: #B4846C;">
             <top>
-                <HBox prefHeight="74.0" prefWidth="1104.0" style="-fx-background-color: #FFBC80;" BorderPane.alignment="CENTER">
+                <HBox prefHeight="74.0" prefWidth="1104.0" style="-fx-background-color: #7D5A50;" BorderPane.alignment="CENTER">
                     <children>
                         <VBox alignment="CENTER" prefHeight="104.0" prefWidth="214.0">
                             <children>

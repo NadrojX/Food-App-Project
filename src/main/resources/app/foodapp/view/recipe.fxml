@@ -16,7 +16,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@MyCss.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.foodapp.model.controller_IG">
     <children>
-        <BorderPane layoutX="-1.0" layoutY="-2.0" prefHeight="715.0" prefWidth="1104.0" style="-fx-background-color: B4846C;">
+        <BorderPane layoutX="-1.0" layoutY="-2.0" prefHeight="715.0" prefWidth="1104.0" style="-fx-background-color: #B4846C;">
             <top>
                 <HBox prefHeight="74.0" prefWidth="1104.0" style="-fx-background-color: #7D5A50;" BorderPane.alignment="CENTER">
                     <children>
@@ -37,8 +37,7 @@
                             <children>
                         <Pane prefHeight="74.0" prefWidth="598.0">
                            <children>
-                                      <Button fx:id="fav_button" layoutX="530.0" layoutY="20.0" mnemonicParsing="false" onAction="#switchToScene2" prefHeight="35.0" prefWidth="46.0" styleClass="button_heart" />
-                              <Button fx:id="button_acceuil" layoutX="42.0" layoutY="25.0" mnemonicParsing="false" onAction="#switchToScene3" text="Acceuil" />
+                               <Button fx:id="fav_button" layoutX="530.0" layoutY="20.0" mnemonicParsing="false" onAction="#switchToScene2" prefHeight="35.0" prefWidth="46.0" styleClass="button_heart" />
                            </children>
                         </Pane>
                             </children>
