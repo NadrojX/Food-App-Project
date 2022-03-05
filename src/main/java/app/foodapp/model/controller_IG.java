@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
+import javafx.stage.StageStyle;
 import org.json.simple.JSONObject;
 
 import java.io.IOException;
@@ -152,6 +153,15 @@ public class controller_IG {
     }
 
     public void addToListView(int numberOfObjects) {
+
+        if(JsonGestion.recipe.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.NONE);
+            alert.setContentText("Ingredients entre incorrect. Penser a mettre \nle nom anglais des ingredients.");
+            alert.setTitle("Erreur  | Information");
+            alert.getDialogPane().getButtonTypes().add(ButtonType.OK);
+            alert.showAndWait();
+            return;
+        }
 
         JSONObject jsonObject1 = JsonGestion.recipe.get(0);
         JSONObject jsonObject2 = JsonGestion.recipe.get(1);
