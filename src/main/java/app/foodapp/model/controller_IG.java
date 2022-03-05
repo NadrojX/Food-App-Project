@@ -14,20 +14,15 @@ import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
+import java.net.URL;
+import java.net.URLConnection;
+
 public class controller_IG {
 
     private Stage stage;
     private Scene scene;
     private Parent root;
-
-
-    @FXML
-    public void userSearch(){
-        String userSearch = search_barre.getText();
-    }
-
-
-
+    String userSearch;
     @FXML
     public void itemChosenInList(MouseEvent arg0) throws Exception {
         int index = liste.getSelectionModel().getSelectedIndex();
@@ -144,4 +139,86 @@ public class controller_IG {
         Stage window = (Stage) logo.getScene().getWindow();
         window.setScene(new Scene(root));
     }
+
+    @FXML
+    public void userSearch(){
+        userSearch = search_barre.getText();
+    }
+
+    @FXML
+    public void Search(){
+
+    }
+/*
+    public void addToListView(int numberOfObjects) {
+        switch (numberOfObjects) {
+            default:
+                break;
+            case 1:
+                liste.getItems().add(jsonObject1.get("title"));
+                break;
+            case 2:
+                liste.getItems().add(jsonObject1.get("title"));
+                liste.getItems().add(jsonObject2.get("title"));
+                break;
+            case 3:
+                liste.getItems().add(jsonObject1.get("title"));
+                liste.getItems().add(jsonObject2.get("title"));
+                liste.getItems().add(jsonObject3.get("title"));
+                break;
+            case 4:
+                liste.getItems().add(jsonObject1.get("title"));
+                liste.getItems().add(jsonObject2.get("title"));
+                liste.getItems().add(jsonObject3.get("title"));
+                liste.getItems().add(jsonObject4.get("title"));
+                break;
+            case 5:
+                liste.getItems().add(jsonObject1.get("title"));
+                liste.getItems().add(jsonObject2.get("title"));
+                liste.getItems().add(jsonObject3.get("title"));
+                liste.getItems().add(jsonObject4.get("title"));
+                liste.getItems().add(jsonObject5.get("title"));
+                break;
+        }
+    }
+
+    @FXML
+    public void itemChosenInList(MouseEvent arg0) throws Exception {
+        int index = liste.getSelectionModel().getSelectedIndex();
+
+        switch (index) {
+            default:
+                break;
+            case 0:
+                // empêche la sélection d'objets vides entrainant un passage à la page suivante
+                if (arrayResearch.size() == 0 || arrayResearch.size() == indice) {
+                    break;
+                }
+                id = (Long) jsonObject1.get("id");
+                itemJsonObject = jsonObject1;
+                break;
+            case 1:
+                id = (Long) jsonObject2.get("id");
+                itemJsonObject = jsonObject2;
+                break;
+            case 2:
+                id = (Long) jsonObject3.get("id");
+                itemJsonObject = jsonObject3;
+                break;
+            case 3:
+                id = (Long) jsonObject4.get("id");
+                itemJsonObject = jsonObject4;
+                break;
+            case 4:
+                id = (Long) jsonObject5.get("id");
+                itemJsonObject = jsonObject5;
+                break;
+        }
+
+        // empêche la sélection d'objets vides entrainant une erreur
+        if (!(arrayResearch.size() == 0) && !(arrayResearch.size() == indice)) {
+            switchToScene3();
+        }
+    }
+*/
 }
