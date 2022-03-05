@@ -6,14 +6,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import org.json.simple.JSONObject;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -23,10 +23,6 @@ public class controller_IG {
     private Scene scene;
     private Parent root;
     String userSearch;
-    @FXML
-    public void itemChosenInList(MouseEvent arg0) throws Exception {
-        int index = liste.getSelectionModel().getSelectedIndex();
-    }
 
 /*
 
@@ -52,6 +48,9 @@ public class controller_IG {
         Stage stage = (Stage) quit.getScene().getWindow();
         stage.close();
     }
+
+    @FXML
+    private Button button_acceuil;
 
     @FXML
     private Button button1;
@@ -113,18 +112,18 @@ public class controller_IG {
     private Button button_fav5;
 
     @FXML
-    private ListView<?> liste;
+    private ListView<Object> liste;
 
     @FXML
     private ImageView logo;
-/*
+
     @FXML
-    void switchToScene1(ActionEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Page_recette.fxml"));
-        Stage window = (Stage) next_button.getScene().getWindow();
+    void switchToScene1() throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/app/foodapp/view/Page_recette.fxml"));
+        Stage window = (Stage) liste.getScene().getWindow();
         window.setScene(new Scene(root));
     }
-*/
+
     @FXML
     public void switchToScene2() throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/app/foodapp/view/favoris.fxml"));
@@ -135,22 +134,33 @@ public class controller_IG {
 
     @FXML
     public void switchToScene3() throws Exception {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("/app/foodapp/view/foodapp.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/app/foodapp/view/foodapp.fxml"));
         Stage window = (Stage) logo.getScene().getWindow();
         window.setScene(new Scene(root));
     }
 
     @FXML
-    public void userSearch(){
+    public void userSearch() throws IOException {
         userSearch = search_barre.getText();
+        search();
     }
 
     @FXML
-    public void Search(){
-
+    public void search() throws IOException {
+        URL url = new URL("https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + userSearch + "&number=5&apiKey=a838ed2668eb4c62be56c24234c05a5c");
+        URLConnection spoonacular = url.openConnection();
+        JsonGestion.jsonTitleIngredientsRead("title", spoonacular);
+        addToListView(5);
     }
-/*
+
     public void addToListView(int numberOfObjects) {
+
+        JSONObject jsonObject1 = JsonGestion.recipe.get(0);
+        JSONObject jsonObject2 = JsonGestion.recipe.get(1);
+        JSONObject jsonObject3 = JsonGestion.recipe.get(2);
+        JSONObject jsonObject4 = JsonGestion.recipe.get(3);
+        JSONObject jsonObject5 = JsonGestion.recipe.get(4);
+
         switch (numberOfObjects) {
             default:
                 break;
@@ -184,14 +194,24 @@ public class controller_IG {
 
     @FXML
     public void itemChosenInList(MouseEvent arg0) throws Exception {
+
+        JSONObject jsonObject1 = JsonGestion.recipe.get(0);
+        JSONObject jsonObject2 = JsonGestion.recipe.get(1);
+        JSONObject jsonObject3 = JsonGestion.recipe.get(2);
+        JSONObject jsonObject4 = JsonGestion.recipe.get(3);
+        JSONObject jsonObject5 = JsonGestion.recipe.get(4);
+
         int index = liste.getSelectionModel().getSelectedIndex();
+        Long id;
+        JSONObject itemJsonObject;
+        int indice = JsonGestion.recipe.size() + 1;
 
         switch (index) {
             default:
                 break;
             case 0:
                 // empêche la sélection d'objets vides entrainant un passage à la page suivante
-                if (arrayResearch.size() == 0 || arrayResearch.size() == indice) {
+                if (JsonGestion.recipe.size() == 0 || JsonGestion.recipe.size() == indice) {
                     break;
                 }
                 id = (Long) jsonObject1.get("id");
@@ -216,9 +236,10 @@ public class controller_IG {
         }
 
         // empêche la sélection d'objets vides entrainant une erreur
-        if (!(arrayResearch.size() == 0) && !(arrayResearch.size() == indice)) {
-            switchToScene3();
+        if (!(JsonGestion.recipe.size() == 0) && !(JsonGestion.recipe.size() == indice)) {
+            switchToScene1();
+
         }
     }
-*/
+
 }
