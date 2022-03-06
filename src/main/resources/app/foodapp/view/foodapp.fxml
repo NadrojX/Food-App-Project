@@ -45,7 +45,7 @@
                               <Insets left="10.0" top="40.0" />
                            </HBox.margin>
                         </TextField>
-                        <Button fx:id="search_button" mnemonicParsing="false" onAction="#userSearch" text="Button">
+                        <Button fx:id="search_button" mnemonicParsing="false" onAction="#userSearch" text="Search">
                            <HBox.margin>
                               <Insets top="40.0" />
                            </HBox.margin>

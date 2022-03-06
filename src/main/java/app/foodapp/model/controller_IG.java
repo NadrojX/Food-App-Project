@@ -26,22 +26,29 @@ public class controller_IG {
     private Parent root;
     String userSearch;
 
-/*
 
+/*
     public void addAndRemoveFromFavorites(ActionEvent event) {
+        
+        int checkFav = 0;
+        
         if (checkFav == 1) {
-            App.arrayOfFavs.removeToFavs(recette_info);
-            add_button.setStyle("-fx-background-color: #E8E8E8; ");
+            arrayOfFavs.removeToFavs(recette_info);
+            add_fav.setStyle("-fx-background-color: #E8E8E8; ");
             checkFav = 0;
         }
 
         else {
             App.arrayOfFavs.addToFavs(recette_info);
-            add_button.setStyle("-fx-background-color: #FC4F4F; ");
+            add_fav.setStyle("-fx-background-color: #FC4F4F; ");
             checkFav = 1;
         }
     }
 */
+
+    @FXML
+    private Button add_fav;
+
     @FXML
     private Button quit;
 
@@ -259,7 +266,8 @@ public class controller_IG {
         if(JsonGestion.fav.isEmpty()){
             return;
         }
-        fav.getItems().addAll(JsonGestion.fav);
+        String[] name = {"test"};
+        fav.getItems().addAll(name);
     }
 
 }
