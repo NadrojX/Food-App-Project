@@ -48,6 +48,15 @@ public class controller_IG {
 */
 
     @FXML
+    private ImageView image_recette;
+
+    @FXML
+    private ListView<?> liste_ingredient;
+
+    @FXML
+    private ListView<?> step_recipe;
+
+    @FXML
     private Button add_fav;
 
     @FXML
