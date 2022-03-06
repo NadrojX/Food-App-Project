@@ -7,11 +7,17 @@ import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.net.URLConnection;
+import java.util.ArrayList;
 
 public class JsonGestion {
 
+    public static ArrayList<JSONObject> recipe = new ArrayList<>();
+    public static ArrayList<Object> fav = new ArrayList<>();
+
+
     public static void jsonTitleIngredientsRead(String section, URLConnection urlConnection) {
         int i = 0;
+        recipe.clear();
         JSONParser jsonParser = new JSONParser();
         try (Reader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()))) {
             JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);
@@ -20,9 +26,11 @@ public class JsonGestion {
                     return;
                 }
                 JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                recipe.add(jsonObject);
                 System.out.println(i + 1 + ". " + jsonObject.get(section));
                 i++;
             }
+
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
@@ -38,6 +46,7 @@ public class JsonGestion {
                     return;
                 }
                 JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                fav.add(jsonObject.get(section));
                 System.out.println(i + 1 + ". " + jsonObject.get(section));
                 i++;
             }
