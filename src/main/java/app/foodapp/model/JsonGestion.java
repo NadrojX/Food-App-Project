@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class JsonGestion {
 
     public static ArrayList<JSONObject> recipe = new ArrayList<>();
+    public static ArrayList<Object> fav = new ArrayList<>();
 
 
     public static void jsonTitleIngredientsRead(String section, URLConnection urlConnection) {
@@ -45,6 +46,7 @@ public class JsonGestion {
                     return;
                 }
                 JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                fav.add(jsonObject.get(section));
                 System.out.println(i + 1 + ". " + jsonObject.get(section));
                 i++;
             }

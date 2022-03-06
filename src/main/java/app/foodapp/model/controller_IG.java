@@ -1,5 +1,7 @@
 package app.foodapp.model;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.StageStyle;
 import org.json.simple.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -47,9 +50,6 @@ public class controller_IG {
         Stage stage = (Stage) quit.getScene().getWindow();
         stage.close();
     }
-
-    @FXML
-    private Button button_acceuil;
 
     @FXML
     private Button button1;
@@ -114,7 +114,13 @@ public class controller_IG {
     private ListView<Object> liste;
 
     @FXML
+    private ListView<Object> fav = new ListView<>();
+
+    @FXML
     private ImageView logo;
+
+    @FXML
+    private Label label;
 
     @FXML
     void switchToScene1() throws Exception {
@@ -129,6 +135,9 @@ public class controller_IG {
         Stage window = (Stage) fav_button.getScene().getWindow();
         window.setScene(new Scene(root));
 
+        File file = new File("src/main/resources/fav.json");
+        JsonGestion.jsonFavTitleRead("title", file);
+        addToFav();
     }
 
     @FXML
@@ -153,7 +162,6 @@ public class controller_IG {
     }
 
     public void addToListView(int numberOfObjects) {
-
         if(JsonGestion.recipe.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.NONE);
             alert.setContentText("Ingredients entre incorrect. Penser a mettre \nle nom anglais des ingredients.");
@@ -170,33 +178,31 @@ public class controller_IG {
         JSONObject jsonObject5 = JsonGestion.recipe.get(4);
 
         switch (numberOfObjects) {
-            default:
-                break;
-            case 1:
-                liste.getItems().add(jsonObject1.get("title"));
-                break;
-            case 2:
+            default -> {
+            }
+            case 1 -> liste.getItems().add(jsonObject1.get("title"));
+            case 2 -> {
                 liste.getItems().add(jsonObject1.get("title"));
                 liste.getItems().add(jsonObject2.get("title"));
-                break;
-            case 3:
+            }
+            case 3 -> {
                 liste.getItems().add(jsonObject1.get("title"));
                 liste.getItems().add(jsonObject2.get("title"));
                 liste.getItems().add(jsonObject3.get("title"));
-                break;
-            case 4:
+            }
+            case 4 -> {
                 liste.getItems().add(jsonObject1.get("title"));
                 liste.getItems().add(jsonObject2.get("title"));
                 liste.getItems().add(jsonObject3.get("title"));
                 liste.getItems().add(jsonObject4.get("title"));
-                break;
-            case 5:
+            }
+            case 5 -> {
                 liste.getItems().add(jsonObject1.get("title"));
                 liste.getItems().add(jsonObject2.get("title"));
                 liste.getItems().add(jsonObject3.get("title"));
                 liste.getItems().add(jsonObject4.get("title"));
                 liste.getItems().add(jsonObject5.get("title"));
-                break;
+            }
         }
     }
 
@@ -215,39 +221,45 @@ public class controller_IG {
         int indice = JsonGestion.recipe.size() + 1;
 
         switch (index) {
-            default:
-                break;
-            case 0:
+            default -> {
+            }
+            case 0 -> {
                 // empêche la sélection d'objets vides entrainant un passage à la page suivante
-                if (JsonGestion.recipe.size() == 0 || JsonGestion.recipe.size() == indice) {
+                if (JsonGestion.recipe.size() == 0) {
                     break;
                 }
                 id = (Long) jsonObject1.get("id");
                 itemJsonObject = jsonObject1;
-                break;
-            case 1:
+            }
+            case 1 -> {
                 id = (Long) jsonObject2.get("id");
                 itemJsonObject = jsonObject2;
-                break;
-            case 2:
+            }
+            case 2 -> {
                 id = (Long) jsonObject3.get("id");
                 itemJsonObject = jsonObject3;
-                break;
-            case 3:
+            }
+            case 3 -> {
                 id = (Long) jsonObject4.get("id");
                 itemJsonObject = jsonObject4;
-                break;
-            case 4:
+            }
+            case 4 -> {
                 id = (Long) jsonObject5.get("id");
                 itemJsonObject = jsonObject5;
-                break;
+            }
         }
-
         // empêche la sélection d'objets vides entrainant une erreur
         if (!(JsonGestion.recipe.size() == 0) && !(JsonGestion.recipe.size() == indice)) {
             switchToScene1();
-
         }
+    }
+
+    @FXML
+    public void addToFav(){
+        if(JsonGestion.fav.isEmpty()){
+            return;
+        }
+        fav.getItems().addAll(JsonGestion.fav);
     }
 
 }
