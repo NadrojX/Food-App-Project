@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@MyCss.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.foodapp.model.controller_IG">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@MyCss.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.foodapp.model.recipeController">
     <children>
         <BorderPane layoutX="-1.0" layoutY="-2.0" prefHeight="715.0" prefWidth="1104.0" style="-fx-background-color: #B4846C;">
             <top>
@@ -78,13 +78,23 @@
                      <children>
                         <Pane prefHeight="604.0" prefWidth="766.0">
                            <children>
-                              <ListView fx:id="step_recipe" layoutY="70.0" prefHeight="505.0" prefWidth="767.0" style="-fx-border-color: #FCDEC0; -fx-background-color: #FCDEC0;" />
-                              <Label fx:id="name_recipe" alignment="CENTER" prefHeight="56.0" prefWidth="815.0" text="Nom recette">
+                              <ListView fx:id="step_recipe" layoutX="4.0" layoutY="113.0" prefHeight="462.0" prefWidth="781.0" style="-fx-border-color: #FCDEC0; -fx-background-color: #FCDEC0;" />
+                              <Label fx:id="name_recipe" alignment="CENTER" layoutX="36.0" prefHeight="91.0" prefWidth="644.0" text="Nom recette" textAlignment="CENTER" wrapText="true">
                                  <font>
                                     <Font size="25.0" />
                                  </font>
                               </Label>
                               <Button fx:id="add_fav" layoutX="726.0" layoutY="16.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" styleClass="button_heart" />
+                              <Label fx:id="time_prepa" alignment="CENTER" contentDisplay="CENTER" layoutX="167.0" layoutY="77.0" prefHeight="29.0" prefWidth="208.0" text="Label" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="nbr_pers" alignment="CENTER" contentDisplay="CENTER" layoutX="435.0" layoutY="77.0" prefHeight="29.0" prefWidth="208.0" text="Label" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </Pane>
                      </children>
@@ -99,14 +109,18 @@
                      <children>
                         <VBox prefHeight="380.0" prefWidth="200.0" style="-fx-background-color: B4846C;">
                            <children>
-                              <ImageView fx:id="image_recette" fitHeight="270.0" fitWidth="277.0" pickOnBounds="true" preserveRatio="true" />
+                              <Pane prefHeight="327.0" prefWidth="256.0">
+                                 <children>
+                                    <ImageView fx:id="image_recette" fitHeight="247.0" fitWidth="259.0" layoutX="1.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </Pane>
                            </children>
                         </VBox>
                         <VBox prefHeight="342.0" prefWidth="277.0" style="-fx-background-color: #7D5A50; -fx-background-radius: 25;">
                            <children>
                               <Pane prefHeight="298.0" prefWidth="278.0">
                                  <children>
-                                    <ListView fx:id="liste_ingredient" layoutX="1.0" layoutY="25.0" prefHeight="241.0" prefWidth="276.0" style="-fx-background-color: #7D5A50;" />
+                                    <ListView fx:id="liste_ingredient" layoutX="1.0" layoutY="25.0" prefHeight="241.0" prefWidth="251.0" style="-fx-background-color: #7D5A50;" />
                                  </children>
                               </Pane>
                            </children></VBox>

@@ -6,13 +6,15 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
 public class JsonGestion {
 
     public static ArrayList<JSONObject> recipe = new ArrayList<>();
-    public static ArrayList<Object> fav = new ArrayList<>();
+    public static ArrayList<JSONObject> fav = new ArrayList<>();
 
 
     public static void jsonTitleIngredientsRead(String section, URLConnection urlConnection) {
@@ -46,7 +48,7 @@ public class JsonGestion {
                     return;
                 }
                 JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-                fav.add(jsonObject.get(section));
+                fav.add(jsonObject);
                 System.out.println(i + 1 + ". " + jsonObject.get(section));
                 i++;
             }
@@ -191,5 +193,33 @@ public class JsonGestion {
         }
         return null;
     }
+
+    public static JSONObject Recherche_via_id(String id) {
+        JSONObject jsonObj = null;
+        try {
+            URL url = new URL("https://api.spoonacular.com/recipes/" + id + "/information?&apiKey=a838ed2668eb4c62be56c24234c05a5c");
+            HttpURLConnection connexion = (HttpURLConnection) url.openConnection();
+            connexion.setRequestMethod("GET");
+            connexion.connect();
+            // Check if connect is made
+            int responseCode = connexion.getResponseCode();
+
+            // 200 = OK
+            if (responseCode != 200)
+                throw new RuntimeException("HttpResponseCode: " + responseCode);
+            else {
+                InputStream stream = url.openStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+                String myData = reader.readLine();
+                JSONParser jsonParser = new JSONParser();
+                Object obj = jsonParser.parse(myData);
+                jsonObj = (JSONObject) obj;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return jsonObj;
+    }
+
 
 }
