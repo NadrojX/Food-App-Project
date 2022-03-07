@@ -24,6 +24,8 @@ import java.util.ResourceBundle;
 
 public class recipeController implements Initializable {
 
+    int checkFav = 0;
+
     @FXML
     private Button add_fav;
 
@@ -46,7 +48,7 @@ public class recipeController implements Initializable {
     private Button quit;
 
     @FXML
-    private ListView<?> step_recipe;
+    private ListView<String> step_recipe;
 
     @FXML
     private Label nbr_pers;
@@ -56,6 +58,9 @@ public class recipeController implements Initializable {
 
     @FXML
     private Rectangle rectangle;
+
+    @FXML
+    private Rectangle rectangle1;
 
     @FXML
     public void handleCloseButtonAction(ActionEvent event) {
@@ -83,7 +88,7 @@ public class recipeController implements Initializable {
     String idObject = String.valueOf(controller_IG.getId());
     JSONObject recipe_info = JsonGestion.Recherche_via_id(idObject);
     JSONArray ingredient_elements = (JSONArray) recipe_info.get("extendedIngredients");
-
+    JSONArray steps_elements = (JSONArray) recipe_info.get("analyzedInstructions");
 
     String title = (String) recipe_info.get("title");
     String image = (String) recipe_info.get("image");
@@ -103,15 +108,50 @@ public class recipeController implements Initializable {
         return str;
     }
 
+    String gettingAllSteps12(JSONArray steps) {
+        Object obj = "";
+        String str = "";
+        for (int i = 0; i < steps.size(); i++) {
+            obj = steps.get(i);
+            JSONObject jObject = (JSONObject) obj;
+            String steps_elements = (String) jObject.get("steps");
+
+            step_recipe.getItems().add(steps_elements + ".");
+        }
+        return str;
+    }
+
+    String gettingAllSteps(JSONArray instructions) {
+        Object obj = "";
+        String str2 = "";
+        Object obj2 = "";
+
+        for (int i = 0; i < instructions.size(); i++) {
+            obj = instructions.get(i);
+            JSONObject jObject = (JSONObject) obj;
+
+            JSONArray jArray = (JSONArray) jObject.get("steps");
+            for (int j = 0; j < jArray.size(); j++) {
+                obj2 = jArray.get(j);
+                JSONObject jObject2 = (JSONObject) obj2;
+                step_recipe.getItems()
+                        .add("Step " + jObject2.get("number") + " : " + (String) jObject2.get("step"));
+            }
+        }
+        return str2;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         name_recipe.setText(title);
         image_recette.setImage(new Image(image));
-        time_prepa.setText("" + temps_prepa + " min");
-        nbr_pers.setText("for " + nbr_person + " person(s)");
+        time_prepa.setText("Preparation time: " + temps_prepa + " min");
+        nbr_pers.setText("Recipe for " + nbr_person + " person(s)");
         gettingAllIngredients(ingredient_elements);
+        gettingAllSteps(steps_elements);
         l_ingredients.setStyle("-fx-control-inner-background: #7D5A50");
+        step_recipe.setStyle("-fx-control-inner-background: #FCDEC0");
 
         l_ingredients.setCellFactory(param -> new ListCell<String>() {
             @Override
@@ -137,8 +177,54 @@ public class recipeController implements Initializable {
                 }
             }
         });
+
+        step_recipe.setCellFactory(param -> new ListCell<String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setGraphic(null);
+                    setText(null);
+                    // other stuff to do...
+
+                } else {
+
+                    // set the width's
+                    setMinWidth(rectangle1.getWidth());
+                    setMaxWidth(rectangle1.getWidth());
+                    setPrefWidth(rectangle1.getWidth());
+
+                    // allow wrapping
+                    setWrapText(true);
+
+                    setText(item);
+
+                }
+            }
+        });
     }
 
+    public void checkFavorites() {
+        if (App.arrayOfFavs.contains(itemJsonObject)) {
+            checkFav = 1;
+            add_fav.setStyle("-fx-background-color: red; ");
+        } else {
+            checkFav = 0;
+            add_fav.setStyle("-fx-background-color: #c4b6ae; ");
+        }
+    }
+
+    public void addAndRemoveFromFavorites(ActionEvent event) {
+        if (checkFav == 1) {
+            App.arrayOfFavs.removeToFavs(itemJsonObject);
+            add_fav.setStyle("-fx-background-color: #c4b6ae; ");
+            checkFav = 0;
+        } else {
+            App.arrayOfFavs.addToFavs(itemJsonObject);
+            add_fav.setStyle("-fx-background-color: red; ");
+            checkFav = 1;
+        }
+    }
 
 
 }
