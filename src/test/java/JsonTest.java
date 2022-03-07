@@ -77,7 +77,7 @@ public class JsonTest {
         title6.add("beetroot apple smoothie");
         URL url = new URL("https://api.spoonacular.com/recipes/findByIngredients?ingredients=apple&number=2&apiKey=a838ed2668eb4c62be56c24234c05a5c%22");
         URLConnection urlConnection = url.openConnection();
-        JsonGestion.jsonGetId(, urlConnection);
+        JsonGestion.jsonGetId("id", 0, urlConnection);
         String test = JsonGestion.recipe.get(0).get("title").toString();
         assertEquals(title6.get(0),test);
     }
