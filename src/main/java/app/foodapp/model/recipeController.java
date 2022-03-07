@@ -8,10 +8,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -51,6 +53,9 @@ public class recipeController implements Initializable {
 
     @FXML
     private Label time_prepa;
+
+    @FXML
+    private Rectangle rectangle;
 
     @FXML
     public void handleCloseButtonAction(ActionEvent event) {
@@ -100,10 +105,39 @@ public class recipeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         name_recipe.setText(title);
         image_recette.setImage(new Image(image));
         time_prepa.setText("" + temps_prepa + " min");
         nbr_pers.setText("for " + nbr_person + " person(s)");
         gettingAllIngredients(ingredient_elements);
+
+        liste_ingredient.setCellFactory(param -> new ListCell<String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setGraphic(null);
+                    setText(null);
+                    // other stuff to do...
+
+                } else {
+
+                    // set the width's
+                    setMinWidth(rectangle.getWidth());
+                    setMaxWidth(rectangle.getWidth());
+                    setPrefWidth(rectangle.getWidth());
+
+                    // allow wrapping
+                    setWrapText(true);
+
+                    setText(item);
+
+                }
+            }
+        });
     }
+
+
+
 }
