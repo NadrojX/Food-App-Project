@@ -19,3 +19,11 @@
 .button_heart1:hover {
     -fx-background-color: #FC4F4F;
 }
+
+.l_ingredients:even{
+    -fx-background-color: #7D5A50;
+}
+
+.l_ingredients:even{
+    -fx-background-color: #7D5A50;
+}

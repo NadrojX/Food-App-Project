@@ -197,7 +197,7 @@ public class JsonGestion {
     public static JSONObject Recherche_via_id(String id) {
         JSONObject jsonObj = null;
         try {
-            URL url = new URL("https://api.spoonacular.com/recipes/" + id + "/information?&apiKey=a838ed2668eb4c62be56c24234c05a5c");
+            URL url = new URL("https://api.spoonacular.com/recipes/" + id + "/information?&apiKey=239ae3175a894dc78711d17509918bfe");
             HttpURLConnection connexion = (HttpURLConnection) url.openConnection();
             connexion.setRequestMethod("GET");
             connexion.connect();

@@ -34,7 +34,7 @@ public class recipeController implements Initializable {
     private ImageView image_recette;
 
     @FXML
-    private ListView<String > liste_ingredient;
+    private ListView<String > l_ingredients;
 
     @FXML
     private ImageView logo;
@@ -98,7 +98,7 @@ public class recipeController implements Initializable {
             JSONObject jObject = (JSONObject) obj;
             String ingredients_elements = (String) jObject.get("original");
 
-            liste_ingredient.getItems().add(ingredients_elements + ".");
+            l_ingredients.getItems().add(ingredients_elements + ".");
         }
         return str;
     }
@@ -112,7 +112,7 @@ public class recipeController implements Initializable {
         nbr_pers.setText("for " + nbr_person + " person(s)");
         gettingAllIngredients(ingredient_elements);
 
-        liste_ingredient.setCellFactory(param -> new ListCell<String>() {
+        l_ingredients.setCellFactory(param -> new ListCell<String>() {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
