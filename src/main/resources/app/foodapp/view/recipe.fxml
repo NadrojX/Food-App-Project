@@ -85,7 +85,7 @@
                                     <Font size="25.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="add_fav" layoutX="726.0" layoutY="16.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="26.0" styleClass="button_heart" />
+                              <Button fx:id="add_fav" layoutX="726.0" layoutY="16.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="26.0" styleClass="button_heart" />
                               <Label fx:id="time_prepa" alignment="CENTER" contentDisplay="CENTER" layoutX="113.0" layoutY="119.0" prefHeight="30.0" prefWidth="296.0" text="Label" textAlignment="CENTER">
                                  <font>
                                     <Font size="20.0" />

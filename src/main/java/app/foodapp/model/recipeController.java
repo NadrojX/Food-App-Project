@@ -203,7 +203,7 @@ public class recipeController implements Initializable {
             }
         });
     }
-
+/*
     public void checkFavorites() {
         if (App.arrayOfFavs.contains(itemJsonObject)) {
             checkFav = 1;
@@ -226,5 +226,5 @@ public class recipeController implements Initializable {
         }
     }
 
-
+*/
 }
