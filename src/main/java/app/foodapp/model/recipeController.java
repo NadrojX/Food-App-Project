@@ -111,6 +111,7 @@ public class recipeController implements Initializable {
         time_prepa.setText("" + temps_prepa + " min");
         nbr_pers.setText("for " + nbr_person + " person(s)");
         gettingAllIngredients(ingredient_elements);
+        l_ingredients.setStyle("-fx-control-inner-background: #7D5A50");
 
         l_ingredients.setCellFactory(param -> new ListCell<String>() {
             @Override

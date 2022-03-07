@@ -122,7 +122,7 @@
                               <Pane prefHeight="298.0" prefWidth="278.0">
                                  <children>
                                     <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="230.0" layoutX="7.0" layoutY="33.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="241.0" />
-                                    <ListView fx:id="l_ingredients" layoutX="1.0" layoutY="25.0" prefHeight="241.0" prefWidth="251.0" style="-fx-background-color: #7D5A50;" />
+                                    <ListView fx:id="l_ingredients" layoutX="1.0" layoutY="25.0" prefHeight="241.0" prefWidth="251.0" style="-fx-background-color: #7D5A50; -fx-border-style: none;" stylesheets="@MyCss.css" />
                                  </children>
                               </Pane>
                            </children></VBox>

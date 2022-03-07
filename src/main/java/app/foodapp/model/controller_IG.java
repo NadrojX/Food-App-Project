@@ -157,10 +157,11 @@ public class controller_IG {
 
     //239ae3175a894dc78711d17509918bfe
     //a838ed2668eb4c62be56c24234c05a5c
+    //6f941600fda4481f8f07381032a293b1
 
     @FXML
     public void search() throws IOException {
-        URL url = new URL("https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + userSearch + "&instructionsRequired=true&number=5&apiKey=239ae3175a894dc78711d17509918bfe");
+        URL url = new URL("https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + userSearch + "&instructionsRequired=true&number=5&apiKey=6f941600fda4481f8f07381032a293b1");
         URLConnection spoonacular = url.openConnection();
         JsonGestion.jsonTitleIngredientsRead("title", spoonacular);
         addToListView(5);
@@ -242,6 +243,7 @@ public class controller_IG {
             }
 
         }
+        liste.setStyle("-fx-control-inner-background: #FCDEC0");
     }
 
 /*
