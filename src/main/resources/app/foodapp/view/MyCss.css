@@ -19,3 +19,8 @@
 .button_heart1:hover {
     -fx-background-color: #FC4F4F;
 }
+
+.list-view {
+  -fx-background-insets: 0;
+  -fx-padding: 0;
+}

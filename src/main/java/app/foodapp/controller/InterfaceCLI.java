@@ -38,7 +38,7 @@ public class InterfaceCLI {
 
         int number = scannerNumber.nextInt();
 
-        URL url = new URL("https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + ingredients + "&number=" + number + "&apiKey=a838ed2668eb4c62be56c24234c05a5c");
+        URL url = new URL("https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + ingredients + "&number=" + number + "&instructionsRequired=true&apiKey=239ae3175a894dc78711d17509918bfe");
         URLConnection spoonacular = url.openConnection();
 
         JsonGestion.jsonTitleIngredientsRead("title", spoonacular);
@@ -56,7 +56,7 @@ public class InterfaceCLI {
         JsonGestion.jsonReadIngredients("missedIngredients", numberArray-1, "original", spoonacular3);
 
         spoonacular3 = url.openConnection();
-        URL urlStep = new URL("https://api.spoonacular.com/recipes/" + JsonGestion.jsonGetId("id", numberArray-1, spoonacular3) + "/information?&apiKey=a838ed2668eb4c62be56c24234c05a5c");
+        URL urlStep = new URL("https://api.spoonacular.com/recipes/" + JsonGestion.jsonGetId("id", numberArray-1, spoonacular3) + "/information?&instructionsRequired=true&apiKey=239ae3175a894dc78711d17509918bfe");
         URLConnection spoonacularStep = urlStep.openConnection();
         System.out.println("\nÉtapes de la recette :");
         JsonGestion.jsonStepsRead("analyzedInstructions", spoonacularStep);
@@ -97,7 +97,7 @@ public class InterfaceCLI {
 
             Scanner scanner = new Scanner(System.in);
             int positionChoice = scanner.nextInt() - 1;
-            URL url = new URL("https://api.spoonacular.com/recipes/" + JsonGestion.jsonReturnId(file, positionChoice) + "/information?&apiKey=a838ed2668eb4c62be56c24234c05a5c");
+            URL url = new URL("https://api.spoonacular.com/recipes/" + JsonGestion.jsonReturnId(file, positionChoice) + "/information?&instructionsRequired=true&apiKey=239ae3175a894dc78711d17509918bfe");
             URLConnection spoonacular = url.openConnection();
             System.out.println("Titre de la recette : \n" + JsonGestion.jsonObjectRead("title", spoonacular) + "\n");
 
