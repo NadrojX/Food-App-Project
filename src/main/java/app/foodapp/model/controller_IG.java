@@ -1,9 +1,5 @@
 package app.foodapp.model;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,12 +7,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
-import javafx.stage.StageStyle;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.io.File;
@@ -132,7 +125,7 @@ public class controller_IG implements Initializable {
 
     @FXML
     public void search() throws IOException {
-        URL url = new URL("https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + userSearch + "&number=5&instructionsRequired=true&apiKey=239ae3175a894dc78711d17509918bfe");
+        URL url = new URL("https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + userSearch + "&number=50&instructionsRequired=true&apiKey=239ae3175a894dc78711d17509918bfe");
         URLConnection spoonacular = url.openConnection();
         JsonGestion.jsonTitleIngredientsRead("title", spoonacular);
         addToListView(5);
@@ -148,7 +141,14 @@ public class controller_IG implements Initializable {
             return;
         }
 
-        JSONObject jsonObject1 = JsonGestion.recipe.get(0);
+        for(int i = 0; i < JsonGestion.recipe.size();i++){
+            String recipe = (String) JsonGestion.recipe.get(i).get("title");
+            if(!liste.getItems().contains(recipe)) {
+                liste.getItems().add(recipe);
+            }
+        }
+
+       /* JSONObject jsonObject1 = JsonGestion.recipe.get(0);
         JSONObject jsonObject2 = JsonGestion.recipe.get(1);
         JSONObject jsonObject3 = JsonGestion.recipe.get(2);
         JSONObject jsonObject4 = JsonGestion.recipe.get(3);
@@ -213,87 +213,8 @@ public class controller_IG implements Initializable {
                 liste.getItems().add(jsonObject5.get("title"));
             }
 
-        }
+        } */
         liste.setStyle("-fx-control-inner-background: #FCDEC0");
-    }
-
-    public void addToListView1(int numberOfObjects) {
-        if(JsonGestion.recipe.isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.NONE);
-            alert.setContentText("Ingredients entre incorrect. Penser a mettre \nle nom anglais des ingredients.");
-            alert.setTitle("Erreur  | Information");
-            alert.getDialogPane().getButtonTypes().add(ButtonType.OK);
-            alert.showAndWait();
-            return;
-        }
-
-        JSONObject jsonObject1 = JsonGestion.fav.get(0);
-        JSONObject jsonObject2 = JsonGestion.fav.get(1);
-        JSONObject jsonObject3 = JsonGestion.fav.get(2);
-        JSONObject jsonObject4 = JsonGestion.fav.get(3);
-        JSONObject jsonObject5 = JsonGestion.fav.get(4);
-
-        switch (numberOfObjects) {
-            default -> {
-            }
-            case 1 -> {
-                String imageSource1 = (String) jsonObject1.get("image");
-                img1.setImage(new Image(imageSource1));
-                list_fav.getItems().add(jsonObject1.get("title"));
-            }
-            case 2 -> {
-                String imageSource1 = (String) jsonObject1.get("image");
-                img1.setImage(new Image(imageSource1));
-                String imageSource2 = (String) jsonObject2.get("image");
-                img2.setImage(new Image(imageSource2));
-                list_fav.getItems().add(jsonObject1.get("title"));
-                list_fav.getItems().add(jsonObject2.get("title"));
-            }
-            case 3 -> {
-                String imageSource1 = (String) jsonObject1.get("image");
-                img1.setImage(new Image(imageSource1));
-                String imageSource2 = (String) jsonObject2.get("image");
-                img2.setImage(new Image(imageSource2));
-                String imageSource3 = (String) jsonObject3.get("image");
-                img3.setImage(new Image(imageSource3));
-                list_fav.getItems().add(jsonObject1.get("title"));
-                list_fav.getItems().add(jsonObject2.get("title"));
-                list_fav.getItems().add(jsonObject3.get("title"));
-            }
-            case 4 -> {
-                String imageSource1 = (String) jsonObject1.get("image");
-                img1.setImage(new Image(imageSource1));
-                String imageSource2 = (String) jsonObject2.get("image");
-                img2.setImage(new Image(imageSource2));
-                String imageSource3 = (String) jsonObject3.get("image");
-                img3.setImage(new Image(imageSource3));
-                String imageSource4 = (String) jsonObject4.get("image");
-                img4.setImage(new Image(imageSource4));
-                list_fav.getItems().add(jsonObject1.get("title"));
-                list_fav.getItems().add(jsonObject2.get("title"));
-                list_fav.getItems().add(jsonObject3.get("title"));
-                list_fav.getItems().add(jsonObject4.get("title"));
-            }
-            case 5 -> {
-                String imageSource1 = (String) jsonObject1.get("image");
-                img1.setImage(new Image(imageSource1));
-                String imageSource2 = (String) jsonObject2.get("image");
-                img2.setImage(new Image(imageSource2));
-                String imageSource3 = (String) jsonObject3.get("image");
-                img3.setImage(new Image(imageSource3));
-                String imageSource4 = (String) jsonObject4.get("image");
-                img4.setImage(new Image(imageSource4));
-                String imageSource5 = (String) jsonObject5.get("image");
-                img5.setImage(new Image(imageSource5));
-                list_fav.getItems().add(jsonObject1.get("title"));
-                list_fav.getItems().add(jsonObject2.get("title"));
-                list_fav.getItems().add(jsonObject3.get("title"));
-                list_fav.getItems().add(jsonObject4.get("title"));
-                list_fav.getItems().add(jsonObject5.get("title"));
-            }
-
-        }
-        list_fav.setStyle("-fx-control-inner-background: #FCDEC0");
     }
 
     @FXML
