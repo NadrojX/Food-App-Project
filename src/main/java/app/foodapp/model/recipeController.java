@@ -6,10 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -21,6 +18,7 @@ import org.json.simple.JSONObject;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class recipeController implements Initializable {
 
@@ -63,6 +61,12 @@ public class recipeController implements Initializable {
     private Rectangle rectangle1;
 
     @FXML
+    private TextField search_barre;
+
+    @FXML
+    private Button search_button;
+
+    @FXML
     public void handleCloseButtonAction(ActionEvent event) {
         Stage stage = (Stage) quit.getScene().getWindow();
         stage.close();
@@ -85,6 +89,7 @@ public class recipeController implements Initializable {
         Stage window = (Stage) logo.getScene().getWindow();
         window.setScene(new Scene(root));
     }
+
     String idObject = String.valueOf(controller_IG.getId());
     JSONObject recipe_info = JsonGestion.Recherche_via_id(idObject);
     JSONArray ingredient_elements = (JSONArray) recipe_info.get("extendedIngredients");
@@ -152,6 +157,8 @@ public class recipeController implements Initializable {
         gettingAllSteps(steps_elements);
         l_ingredients.setStyle("-fx-control-inner-background: #7D5A50");
         step_recipe.setStyle("-fx-control-inner-background: #FCDEC0");
+        checkFavorites();
+
 
         l_ingredients.setCellFactory(param -> new ListCell<String>() {
             @Override
@@ -203,9 +210,9 @@ public class recipeController implements Initializable {
             }
         });
     }
-/*
+
     public void checkFavorites() {
-        if (App.arrayOfFavs.contains(itemJsonObject)) {
+        if (JsonGestion.fav.contains(recipe_info)) {
             checkFav = 1;
             add_fav.setStyle("-fx-background-color: red; ");
         } else {
@@ -216,15 +223,16 @@ public class recipeController implements Initializable {
 
     public void addAndRemoveFromFavorites(ActionEvent event) {
         if (checkFav == 1) {
-            App.arrayOfFavs.removeToFavs(itemJsonObject);
+            Scanner scanner = new Scanner(System.in);
+            JsonGestion.jsonDelFav(scanner.nextInt() - 1);
             add_fav.setStyle("-fx-background-color: #c4b6ae; ");
             checkFav = 0;
         } else {
-            App.arrayOfFavs.addToFavs(itemJsonObject);
+            JsonGestion.jsonAddFav(idObject,title);
             add_fav.setStyle("-fx-background-color: red; ");
             checkFav = 1;
         }
     }
 
-*/
+
 }

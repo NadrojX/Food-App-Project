@@ -48,21 +48,6 @@ public class controller_IG {
     private Button quit;
 
     @FXML
-    private Button button1;
-
-    @FXML
-    private Button button2;
-
-    @FXML
-    private Button button3;
-
-    @FXML
-    private Button button4;
-
-    @FXML
-    private Button button5;
-
-    @FXML
     private Button fav_button;
 
     @FXML
@@ -92,31 +77,17 @@ public class controller_IG {
     //fav
 
     @FXML
-    private Button button_fav1;
-
-    @FXML
-    private Button button_fav2;
-
-    @FXML
-    private Button button_fav3;
-
-    @FXML
-    private Button button_fav4;
-
-    @FXML
-    private Button button_fav5;
-
-    @FXML
     private ListView<Object> liste;
 
     @FXML
-    private ListView<Object> list_fav = new ListView<>();
+    private ListView<Object> list_fav;
 
     @FXML
     private ImageView logo;
 
     @FXML
     private Label label;
+
 
     @FXML
     public void handleCloseButtonAction(ActionEvent event) {
@@ -136,10 +107,6 @@ public class controller_IG {
         Parent root = FXMLLoader.load(getClass().getResource("/app/foodapp/view/favoris.fxml"));
         Stage window = (Stage) fav_button.getScene().getWindow();
         window.setScene(new Scene(root));
-
-        File file = new File("src/main/resources/fav.json");
-        JsonGestion.jsonFavTitleRead("title", file);
-        //addToListView2(1);
     }
 
     @FXML
@@ -161,7 +128,7 @@ public class controller_IG {
 
     @FXML
     public void search() throws IOException {
-        URL url = new URL("https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + userSearch + "&number=5&instructionsRequired=true&apiKey=6f941600fda4481f8f07381032a293b1");
+        URL url = new URL("https://api.spoonacular.com/recipes/findByIngredients?ingredients=" + userSearch + "&number=5&instructionsRequired=true&apiKey=239ae3175a894dc78711d17509918bfe");
         URLConnection spoonacular = url.openConnection();
         JsonGestion.jsonTitleIngredientsRead("title", spoonacular);
         addToListView(5);
@@ -246,6 +213,85 @@ public class controller_IG {
         liste.setStyle("-fx-control-inner-background: #FCDEC0");
     }
 
+    public void addToListView1(int numberOfObjects) {
+        if(JsonGestion.recipe.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.NONE);
+            alert.setContentText("Ingredients entre incorrect. Penser a mettre \nle nom anglais des ingredients.");
+            alert.setTitle("Erreur  | Information");
+            alert.getDialogPane().getButtonTypes().add(ButtonType.OK);
+            alert.showAndWait();
+            return;
+        }
+
+        JSONObject jsonObject1 = JsonGestion.fav.get(0);
+        JSONObject jsonObject2 = JsonGestion.fav.get(1);
+        JSONObject jsonObject3 = JsonGestion.fav.get(2);
+        JSONObject jsonObject4 = JsonGestion.fav.get(3);
+        JSONObject jsonObject5 = JsonGestion.fav.get(4);
+
+        switch (numberOfObjects) {
+            default -> {
+            }
+            case 1 -> {
+                String imageSource1 = (String) jsonObject1.get("image");
+                img1.setImage(new Image(imageSource1));
+                list_fav.getItems().add(jsonObject1.get("title"));
+            }
+            case 2 -> {
+                String imageSource1 = (String) jsonObject1.get("image");
+                img1.setImage(new Image(imageSource1));
+                String imageSource2 = (String) jsonObject2.get("image");
+                img2.setImage(new Image(imageSource2));
+                list_fav.getItems().add(jsonObject1.get("title"));
+                list_fav.getItems().add(jsonObject2.get("title"));
+            }
+            case 3 -> {
+                String imageSource1 = (String) jsonObject1.get("image");
+                img1.setImage(new Image(imageSource1));
+                String imageSource2 = (String) jsonObject2.get("image");
+                img2.setImage(new Image(imageSource2));
+                String imageSource3 = (String) jsonObject3.get("image");
+                img3.setImage(new Image(imageSource3));
+                list_fav.getItems().add(jsonObject1.get("title"));
+                list_fav.getItems().add(jsonObject2.get("title"));
+                list_fav.getItems().add(jsonObject3.get("title"));
+            }
+            case 4 -> {
+                String imageSource1 = (String) jsonObject1.get("image");
+                img1.setImage(new Image(imageSource1));
+                String imageSource2 = (String) jsonObject2.get("image");
+                img2.setImage(new Image(imageSource2));
+                String imageSource3 = (String) jsonObject3.get("image");
+                img3.setImage(new Image(imageSource3));
+                String imageSource4 = (String) jsonObject4.get("image");
+                img4.setImage(new Image(imageSource4));
+                list_fav.getItems().add(jsonObject1.get("title"));
+                list_fav.getItems().add(jsonObject2.get("title"));
+                list_fav.getItems().add(jsonObject3.get("title"));
+                list_fav.getItems().add(jsonObject4.get("title"));
+            }
+            case 5 -> {
+                String imageSource1 = (String) jsonObject1.get("image");
+                img1.setImage(new Image(imageSource1));
+                String imageSource2 = (String) jsonObject2.get("image");
+                img2.setImage(new Image(imageSource2));
+                String imageSource3 = (String) jsonObject3.get("image");
+                img3.setImage(new Image(imageSource3));
+                String imageSource4 = (String) jsonObject4.get("image");
+                img4.setImage(new Image(imageSource4));
+                String imageSource5 = (String) jsonObject5.get("image");
+                img5.setImage(new Image(imageSource5));
+                list_fav.getItems().add(jsonObject1.get("title"));
+                list_fav.getItems().add(jsonObject2.get("title"));
+                list_fav.getItems().add(jsonObject3.get("title"));
+                list_fav.getItems().add(jsonObject4.get("title"));
+                list_fav.getItems().add(jsonObject5.get("title"));
+            }
+
+        }
+        list_fav.setStyle("-fx-control-inner-background: #FCDEC0");
+    }
+
     @FXML
     public void itemChosenInList(MouseEvent arg0) throws Exception {
 
@@ -297,33 +343,5 @@ public class controller_IG {
         return id;
     }
 
-    @FXML
-    public void addToFav(){
-        if(JsonGestion.fav.isEmpty()){
-            return;
-        }
-        for(int i = 0; i < JsonGestion.fav.size(); i++){
-            String string = JsonGestion.fav.get(i).toString();
-            list_fav.getItems().add(string);
-        }
-    }
 
-    /*
-    public void addAndRemoveFromFavorites(ActionEvent event) {
-
-        int checkFav = 0;
-
-        if (checkFav == 1) {
-            arrayOfFavs.removeToFavs(recette_info);
-            add_fav.setStyle("-fx-background-color: #E8E8E8; ");
-            checkFav = 0;
-        }
-
-        else {
-            App.arrayOfFavs.addToFavs(recette_info);
-            add_fav.setStyle("-fx-background-color: #FC4F4F; ");
-            checkFav = 1;
-        }
-    }
-*/
 }
