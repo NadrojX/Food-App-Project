@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -22,8 +23,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ResourceBundle;
 
-public class controller_IG {
+public class controller_IG implements Initializable {
 
     private static Long id;
     private Stage stage;
@@ -107,6 +109,8 @@ public class controller_IG {
         Parent root = FXMLLoader.load(getClass().getResource("/app/foodapp/view/favoris.fxml"));
         Stage window = (Stage) fav_button.getScene().getWindow();
         window.setScene(new Scene(root));
+        File file = new File("src/main/resources/fav.json");
+        JsonGestion.jsonFavTitleRead("title", file);
     }
 
     @FXML
@@ -344,4 +348,10 @@ public class controller_IG {
     }
 
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        File file = new File("src/main/resources/fav.json");
+        if(!file.exists()) return;
+        JsonGestion.jsonFavTitleRead("title", file);
+    }
 }

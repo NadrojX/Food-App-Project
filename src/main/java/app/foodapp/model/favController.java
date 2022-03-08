@@ -45,7 +45,6 @@ public class favController implements Initializable {
 
         File file = new File("src/main/resources/fav.json");
         JsonGestion.jsonFavTitleRead("title", file);
-
     }
 
     @FXML
