@@ -7,108 +7,110 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@MyCss.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.foodapp.model.recipeController">
-    <children>
-        <BorderPane layoutX="-1.0" layoutY="-2.0" prefHeight="715.0" prefWidth="1104.0" style="-fx-background-color: #B4846C;">
-            <top>
-                <HBox prefHeight="74.0" prefWidth="1104.0" style="-fx-background-color: #7D5A50;" BorderPane.alignment="CENTER">
-                    <children>
-                        <VBox alignment="CENTER" prefHeight="104.0" prefWidth="214.0">
-                            <children>
-                        <Pane prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                                      <ImageView fx:id="logo" fitHeight="46.0" fitWidth="340.0" layoutX="17.0" layoutY="14.0" onMouseClicked="#switchToScene3" pickOnBounds="true" preserveRatio="true">
-                                          <image>
-                                              <Image url="@LOGO-ROUGE.png" />
-                                          </image>
-                                      </ImageView>
-                           </children>
-                        </Pane>
-                            </children>
-                        </VBox>
-                        <HBox prefHeight="74.0" prefWidth="895.0">
-                            <children>
-                        <Pane prefHeight="74.0" prefWidth="901.0">
-                           <children>
-                               <Button fx:id="quit" cancelButton="true" layoutX="872.0" layoutY="7.0" maxHeight="15.0" maxWidth="15.0" minHeight="15.0" minWidth="15.0" mnemonicParsing="false" onAction="#handleCloseButtonAction" prefHeight="15.0" prefWidth="15.0" style="-fx-background-radius: 50; -fx-background-color: #FC4F4F;">
-                                   <padding>
-                                       <Insets right="200.0" top="20.0" />
-                                   </padding>
-                               </Button>
-                               <Button fx:id="fav_button" layoutX="800.0" layoutY="20.0" mnemonicParsing="false" onAction="#switchToScene2" prefHeight="35.0" prefWidth="46.0" styleClass="button_heart" />
-                           </children>
-                        </Pane>
-                            </children>
-                        </HBox>
-                    </children>
-                </HBox>
-            </top>
-            <center>
-                <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-border-radius: 25%;" BorderPane.alignment="CENTER">
-                    <children>
-                        <VBox prefHeight="598.0" prefWidth="744.0" style="-fx-background-color: #FCDEC0; -fx-background-radius: 25;">
-                            <VBox.margin>
-                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                            </VBox.margin>
-                     <children>
-                        <Pane prefHeight="604.0" prefWidth="766.0">
-                           <children>
-                              <ListView fx:id="step_recipe" editable="true" fixedCellSize="40.0" layoutX="87.0" layoutY="194.0" prefHeight="390.0" prefWidth="612.0" style="-fx-border-color: #FCDEC0; -fx-background-color: #FCDEC0;" />
-                              <Label fx:id="name_recipe" alignment="CENTER" layoutX="72.0" layoutY="-5.0" prefHeight="91.0" prefWidth="644.0" text="Nom recette" textAlignment="CENTER" wrapText="true">
-                                 <font>
-                                    <Font size="25.0" />
-                                 </font>
-                              </Label>
-                              <Button fx:id="add_fav" layoutX="726.0" layoutY="16.0" mnemonicParsing="false" onAction="#addAndRemoveFromFavorites" prefHeight="25.0" prefWidth="26.0" styleClass="button_heart" />
-                              <Label fx:id="time_prepa" alignment="CENTER" contentDisplay="CENTER" layoutX="113.0" layoutY="119.0" prefHeight="30.0" prefWidth="296.0" text="Label" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="nbr_pers" alignment="CENTER" contentDisplay="CENTER" layoutX="409.0" layoutY="119.0" prefHeight="29.0" prefWidth="208.0" text="Label" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
-                              <Rectangle fx:id="rectangle1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="388.0" layoutX="88.0" layoutY="194.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="610.0" />
-                           </children>
-                        </Pane>
-                     </children>
-                        </VBox>
-                    </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@MyCss.css" xmlns="http://javafx.com/javafx/11.0.2"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.foodapp.controller.recipeController">
+    <BorderPane layoutX="-1.0" layoutY="-2.0" prefHeight="715.0" prefWidth="1104.0"
+                style="-fx-background-color: #B4846C;">
+        <top>
+            <HBox prefHeight="74.0" prefWidth="1104.0" style="-fx-background-color: #7D5A50;"
+                  BorderPane.alignment="CENTER">
+                <VBox alignment="CENTER" prefHeight="104.0" prefWidth="214.0">
+                    <Pane prefHeight="200.0" prefWidth="200.0">
+                        <ImageView fx:id="logo" fitHeight="46.0" fitWidth="340.0" layoutX="17.0"
+                                   layoutY="14.0" onMouseClicked="#switchToScene3" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <Image url="@images/LOGO-ROUGE.png"/>
+                        </ImageView>
+                    </Pane>
                 </VBox>
-            </center>
-         <left>
-            <HBox prefHeight="638.0" prefWidth="256.0" style="-fx-background-color: B4846C; -fx-background-radius: 25;" BorderPane.alignment="CENTER">
-               <children>
-                  <VBox prefHeight="591.0" prefWidth="277.0" style="-fx-background-color: B4846C;">
-                     <children>
-                        <VBox prefHeight="380.0" prefWidth="200.0" style="-fx-background-color: B4846C;">
-                           <children>
-                              <Pane prefHeight="327.0" prefWidth="256.0">
-                                 <children>
-                                    <ImageView fx:id="image_recette" fitHeight="247.0" fitWidth="259.0" layoutX="1.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" />
-                                 </children>
-                              </Pane>
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="342.0" prefWidth="277.0" style="-fx-background-color: #7D5A50; -fx-background-radius: 25;">
-                           <children>
-                              <Pane prefHeight="298.0" prefWidth="278.0">
-                                 <children>
-                                    <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="230.0" layoutX="7.0" layoutY="33.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="241.0" />
-                                    <ListView fx:id="l_ingredients" layoutX="1.0" layoutY="25.0" prefHeight="241.0" prefWidth="251.0" style="-fx-background-color: #7D5A50; -fx-border-style: none;" stylesheets="@MyCss.css" />
-                                 </children>
-                              </Pane>
-                           </children></VBox>
-                     </children>
-                  </VBox>
-               </children>
-               <BorderPane.margin>
-                  <Insets bottom="20.0" left="20.0" top="20.0" />
-               </BorderPane.margin>
+                <HBox prefHeight="74.0" prefWidth="895.0">
+                    <Pane prefHeight="74.0" prefWidth="901.0">
+                        <Button fx:id="quit" cancelButton="true" layoutX="872.0" layoutY="7.0"
+                                maxHeight="15.0" maxWidth="15.0" minHeight="15.0" minWidth="15.0"
+                                mnemonicParsing="false" onAction="#handleCloseButtonAction"
+                                prefHeight="15.0" prefWidth="15.0"
+                                style="-fx-background-radius: 50; -fx-background-color: #FC4F4F;">
+                            <padding>
+                                <Insets right="200.0" top="20.0"/>
+                            </padding>
+                        </Button>
+                        <Button fx:id="fav_button" layoutX="800.0" layoutY="20.0" mnemonicParsing="false"
+                                onAction="#switchToScene2" prefHeight="35.0" prefWidth="46.0"
+                                styleClass="button_heart"/>
+                    </Pane>
+                </HBox>
             </HBox>
-         </left>
-        </BorderPane>
-    </children>
+        </top>
+        <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-border-radius: 25%;" BorderPane.alignment="CENTER">
+                <VBox prefHeight="598.0" prefWidth="744.0"
+                      style="-fx-background-color: #FCDEC0; -fx-background-radius: 25;">
+                    <VBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                    </VBox.margin>
+                    <Pane prefHeight="604.0" prefWidth="766.0">
+                        <ListView fx:id="step_recipe" editable="true" fixedCellSize="40.0" layoutX="87.0"
+                                  layoutY="194.0" prefHeight="390.0" prefWidth="612.0"
+                                  style="-fx-border-color: #FCDEC0; -fx-background-color: #FCDEC0;"/>
+                        <Label fx:id="name_recipe" alignment="CENTER" layoutX="72.0" layoutY="-5.0"
+                               prefHeight="91.0" prefWidth="644.0" text="Nom recette" textAlignment="CENTER"
+                               wrapText="true">
+                            <font>
+                                <Font size="25.0"/>
+                            </font>
+                        </Label>
+                        <Button fx:id="add_fav" layoutX="726.0" layoutY="16.0" mnemonicParsing="false"
+                                onAction="#addAndRemoveFromFavorites" prefHeight="25.0" prefWidth="26.0"
+                                styleClass="button_heart"/>
+                        <Label fx:id="time_prepa" alignment="CENTER" contentDisplay="CENTER" layoutX="113.0"
+                               layoutY="119.0" prefHeight="30.0" prefWidth="296.0" text="Label"
+                               textAlignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="nbr_pers" alignment="CENTER" contentDisplay="CENTER" layoutX="409.0"
+                               layoutY="119.0" prefHeight="29.0" prefWidth="208.0" text="Label"
+                               textAlignment="CENTER">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Label>
+                        <Rectangle fx:id="rectangle1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE"
+                                   height="388.0" layoutX="88.0" layoutY="194.0" stroke="BLACK"
+                                   strokeType="INSIDE" visible="false" width="610.0"/>
+                    </Pane>
+                </VBox>
+            </VBox>
+        </center>
+        <left>
+            <HBox prefHeight="638.0" prefWidth="256.0" style="-fx-background-color: B4846C; -fx-background-radius: 25;"
+                  BorderPane.alignment="CENTER">
+                <BorderPane.margin>
+                    <Insets bottom="20.0" left="20.0" top="20.0"/>
+                </BorderPane.margin>
+                <VBox prefHeight="591.0" prefWidth="277.0" style="-fx-background-color: B4846C;">
+                    <VBox prefHeight="380.0" prefWidth="200.0" style="-fx-background-color: B4846C;">
+                        <Pane prefHeight="327.0" prefWidth="256.0">
+                            <ImageView fx:id="image_recette" fitHeight="247.0" fitWidth="259.0"
+                                       layoutX="1.0" layoutY="40.0" pickOnBounds="true"
+                                       preserveRatio="true"/>
+                        </Pane>
+                    </VBox>
+                    <VBox prefHeight="342.0" prefWidth="277.0"
+                          style="-fx-background-color: #7D5A50; -fx-background-radius: 25;">
+                        <Pane prefHeight="298.0" prefWidth="278.0">
+                            <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE"
+                                       height="230.0" layoutX="7.0" layoutY="33.0" stroke="BLACK"
+                                       strokeType="INSIDE" visible="false" width="241.0"/>
+                            <ListView fx:id="l_ingredients" layoutX="1.0" layoutY="25.0"
+                                      prefHeight="241.0" prefWidth="251.0"
+                                      style="-fx-background-color: #7D5A50; -fx-border-style: none;"
+                                      stylesheets="@MyCss.css"/>
+                        </Pane>
+                    </VBox>
+                </VBox>
+            </HBox>
+        </left>
+    </BorderPane>
 </AnchorPane>

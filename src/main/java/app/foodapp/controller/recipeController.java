@@ -1,6 +1,6 @@
-package app.foodapp.model;
+package app.foodapp.controller;
 
-import javafx.event.ActionEvent;
+import app.foodapp.model.JsonGestion;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import org.json.simple.JSONArray;
@@ -17,6 +16,7 @@ import org.json.simple.JSONObject;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -61,31 +61,24 @@ public class recipeController implements Initializable {
     private Rectangle rectangle1;
 
     @FXML
-    private TextField search_barre;
-
-    @FXML
-    private Button search_button;
-
-    @FXML
-    public void handleCloseButtonAction(ActionEvent event) {
+    public void handleCloseButtonAction() {
         Stage stage = (Stage) quit.getScene().getWindow();
         stage.close();
     }
 
     @FXML
     public void switchToScene2() throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/app/foodapp/view/favoris.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/foodapp/view/favoris.fxml")));
         Stage window = (Stage) fav_button.getScene().getWindow();
         window.setScene(new Scene(root));
 
         File file = new File("src/main/resources/fav.json");
         JsonGestion.jsonFavTitleRead("title", file);
-
     }
 
     @FXML
     public void switchToScene3() throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/app/foodapp/view/foodapp.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/foodapp/view/foodapp.fxml")));
         Stage window = (Stage) logo.getScene().getWindow();
         window.setScene(new Scene(root));
     }
@@ -100,50 +93,33 @@ public class recipeController implements Initializable {
     Long temps_prepa = (Long) recipe_info.get("readyInMinutes");
     Long nbr_person = (Long) recipe_info.get("servings");
 
-    String gettingAllIngredients(JSONArray ingredients2) {
-        Object obj = "";
-        String str = "";
-        for (int i = 0; i < ingredients2.size(); i++) {
-            obj = ingredients2.get(i);
+    void gettingAllIngredients(JSONArray ingredients2) {
+        Object obj;
+        for (Object o : ingredients2) {
+            obj = o;
             JSONObject jObject = (JSONObject) obj;
             String ingredients_elements = (String) jObject.get("original");
 
             l_ingredients.getItems().add(ingredients_elements + ".");
         }
-        return str;
     }
 
-    String gettingAllSteps12(JSONArray steps) {
-        Object obj = "";
-        String str = "";
-        for (int i = 0; i < steps.size(); i++) {
-            obj = steps.get(i);
-            JSONObject jObject = (JSONObject) obj;
-            String steps_elements = (String) jObject.get("steps");
+    void gettingAllSteps(JSONArray instructions) {
+        Object obj;
+        Object obj2;
 
-            step_recipe.getItems().add(steps_elements + ".");
-        }
-        return str;
-    }
-
-    String gettingAllSteps(JSONArray instructions) {
-        Object obj = "";
-        String str2 = "";
-        Object obj2 = "";
-
-        for (int i = 0; i < instructions.size(); i++) {
-            obj = instructions.get(i);
+        for (Object instruction : instructions) {
+            obj = instruction;
             JSONObject jObject = (JSONObject) obj;
 
             JSONArray jArray = (JSONArray) jObject.get("steps");
-            for (int j = 0; j < jArray.size(); j++) {
-                obj2 = jArray.get(j);
+            for (Object o : jArray) {
+                obj2 = o;
                 JSONObject jObject2 = (JSONObject) obj2;
                 step_recipe.getItems()
-                        .add("Step " + jObject2.get("number") + " : " + (String) jObject2.get("step"));
+                        .add("Step " + jObject2.get("number") + " : " + jObject2.get("step"));
             }
         }
-        return str2;
     }
 
     @Override
@@ -160,52 +136,37 @@ public class recipeController implements Initializable {
         checkFavorites();
 
 
-        l_ingredients.setCellFactory(param -> new ListCell<String>() {
+        l_ingredients.setCellFactory(param -> new ListCell<>() {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setGraphic(null);
                     setText(null);
-                    // other stuff to do...
-
                 } else {
-
-                    // set the width's
                     setMinWidth(rectangle.getWidth());
                     setMaxWidth(rectangle.getWidth());
                     setPrefWidth(rectangle.getWidth());
-
-                    // allow wrapping
                     setWrapText(true);
-
                     setText(item);
-
                 }
             }
         });
 
-        step_recipe.setCellFactory(param -> new ListCell<String>() {
+        step_recipe.setCellFactory(param -> new ListCell<>() {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setGraphic(null);
                     setText(null);
-                    // other stuff to do...
-
                 } else {
-
-                    // set the width's
                     setMinWidth(rectangle1.getWidth());
                     setMaxWidth(rectangle1.getWidth());
                     setPrefWidth(rectangle1.getWidth());
 
-                    // allow wrapping
                     setWrapText(true);
-
                     setText(item);
-
                 }
             }
         });
@@ -221,7 +182,7 @@ public class recipeController implements Initializable {
         }
     }
 
-    public void addAndRemoveFromFavorites(ActionEvent event) {
+    public void addAndRemoveFromFavorites() {
         if (checkFav == 1) {
             Scanner scanner = new Scanner(System.in);
             JsonGestion.jsonDelFav(scanner.nextInt() - 1);

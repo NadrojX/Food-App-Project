@@ -1,6 +1,6 @@
-package app.foodapp.model;
+package app.foodapp.controller;
 
-import javafx.event.ActionEvent;
+import app.foodapp.model.JsonGestion;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class favController implements Initializable {
@@ -23,7 +24,7 @@ public class favController implements Initializable {
     private Button quit;
 
     @FXML
-    public void handleCloseButtonAction(ActionEvent event) {
+    public void handleCloseButtonAction() {
         Stage stage = (Stage) quit.getScene().getWindow();
         stage.close();
     }
@@ -35,11 +36,11 @@ public class favController implements Initializable {
     private Button fav_button;
 
     @FXML
-    private ListView list_fav;
+    private ListView<String> list_fav;
 
     @FXML
     public void switchToScene2() throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/app/foodapp/view/favoris.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/foodapp/view/favoris.fxml")));
         Stage window = (Stage) fav_button.getScene().getWindow();
         window.setScene(new Scene(root));
 
@@ -49,7 +50,7 @@ public class favController implements Initializable {
 
     @FXML
     public void switchToScene3() throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/app/foodapp/view/foodapp.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/app/foodapp/view/foodapp.fxml")));
         Stage window = (Stage) logo.getScene().getWindow();
         window.setScene(new Scene(root));
     }

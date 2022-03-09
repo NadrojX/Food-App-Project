@@ -5,47 +5,45 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@MyCss.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.foodapp.model.favController">
-    <children>
-        <BorderPane layoutX="-1.0" layoutY="-2.0" prefHeight="715.0" prefWidth="1104.0" style="-fx-background-color: #FFE7D1;">
-            <top>
-                <HBox prefHeight="74.0" prefWidth="1104.0" style="-fx-background-color: #7D5A50;" BorderPane.alignment="CENTER">
-                    <children>
-                        <HBox prefHeight="74.0" prefWidth="1415.0">
-                            <children>
-                        <Pane prefHeight="74.0" prefWidth="1172.0">
-                           <children>
-                                      <Button fx:id="fav_button" layoutX="984.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#switchToScene2" prefHeight="35.0" prefWidth="46.0" styleClass="button_heart" />
-                               <Button fx:id="quit" cancelButton="true" layoutX="1083.0" layoutY="7.0" maxHeight="15.0" maxWidth="15.0" minHeight="15.0" minWidth="15.0" mnemonicParsing="false" onAction="#handleCloseButtonAction" prefHeight="15.0" prefWidth="15.0" style="-fx-background-radius: 50; -fx-background-color: #FC4F4F;">
-                                   <padding>
-                                       <Insets right="200.0" top="20.0" />
-                                   </padding>
-                               </Button>
-                                      <ImageView id="logo" fx:id="logo" fitHeight="46.0" fitWidth="188.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#switchToScene3" pickOnBounds="true" preserveRatio="true">
-                                          <image>
-                                              <Image url="@LOGO-ROUGE.png" />
-                                          </image>
-                                      </ImageView>
-                           </children>
-                        </Pane>
-                            </children>
-                        </HBox>
-                        <HBox prefHeight="104.0" prefWidth="312.0" />
-                    </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@MyCss.css" xmlns="http://javafx.com/javafx/11.0.2"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.foodapp.controller.favController">
+    <BorderPane layoutX="-1.0" layoutY="-2.0" prefHeight="715.0" prefWidth="1104.0"
+                style="-fx-background-color: #FFE7D1;">
+        <top>
+            <HBox prefHeight="74.0" prefWidth="1104.0" style="-fx-background-color: #7D5A50;"
+                  BorderPane.alignment="CENTER">
+                <HBox prefHeight="74.0" prefWidth="1415.0">
+                    <Pane prefHeight="74.0" prefWidth="1172.0">
+                        <Button fx:id="fav_button" layoutX="984.0" layoutY="20.0" mnemonicParsing="false"
+                                onMouseClicked="#switchToScene2" prefHeight="35.0" prefWidth="46.0"
+                                styleClass="button_heart"/>
+                        <Button fx:id="quit" cancelButton="true" layoutX="1083.0" layoutY="7.0"
+                                maxHeight="15.0" maxWidth="15.0" minHeight="15.0" minWidth="15.0"
+                                mnemonicParsing="false" onAction="#handleCloseButtonAction"
+                                prefHeight="15.0" prefWidth="15.0"
+                                style="-fx-background-radius: 50; -fx-background-color: #FC4F4F;">
+                            <padding>
+                                <Insets right="200.0" top="20.0"/>
+                            </padding>
+                        </Button>
+                        <ImageView id="logo" fx:id="logo" fitHeight="46.0" fitWidth="188.0" layoutX="14.0"
+                                   layoutY="14.0" onMouseClicked="#switchToScene3" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <Image url="@images/LOGO-ROUGE.png"/>
+                        </ImageView>
+                    </Pane>
                 </HBox>
-            </top>
-         <center>
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #B4846C;" BorderPane.alignment="CENTER">
-               <children>
-                  <Pane prefHeight="641.0" prefWidth="1217.0">
-                     <children>
-                        <ListView fx:id="list_fav" editable="true" fixedCellSize="128.0" layoutX="97.0" layoutY="2.0" prefHeight="638.0" prefWidth="910.0" />
-                     </children>
-                  </Pane>
-                   
-               </children>
+                <HBox prefHeight="104.0" prefWidth="312.0"/>
             </HBox>
-         </center>
-        </BorderPane>
-    </children>
+        </top>
+        <center>
+            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #B4846C;"
+                  BorderPane.alignment="CENTER">
+                <Pane prefHeight="641.0" prefWidth="1217.0">
+                    <ListView fx:id="list_fav" editable="true" fixedCellSize="128.0" layoutX="97.0"
+                              layoutY="2.0" prefHeight="638.0" prefWidth="910.0"/>
+                </Pane>
+            </HBox>
+        </center>
+    </BorderPane>
 </AnchorPane>
