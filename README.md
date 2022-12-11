@@ -1,4 +1,4 @@
-# FoodApp
+# FoodApp-Project
 
 [FR]
 
