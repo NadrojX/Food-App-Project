@@ -1,14 +1,9 @@
 # FoodApp
 
-Ceci est le projet de base pour l'UE Projet: initiation génie logiciel.
+[FR]
 
-Vous devrez développer le logiciel de zéro afin de construire 
-une application de recherche de recettes de cuisine.
+Ce projet à était réaliser dans le cadre de mes études. Le but de ce projet était de développer un logiciel de zéro en groupe, afin de construire une application de recherche de recettes de cuisine.
 
-Groupe R Team 1 :
-ALAMI IBN JAMAA Adam    
-SIARI Amine
+[EN]
 
-Groupe R Team 2 :
-FATEH Nacer
-GALATOLA Jordan
+This project was realized during my studies. The goal of this project was to develop a software of zero in group, in order to build an application of research of kitchen recipes.
